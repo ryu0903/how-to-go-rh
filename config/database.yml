@@ -48,9 +48,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+ <<: *default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: how-to-go_production
-  username: how-to-go
-  password: <%= ENV['HOW-TO-GO_DATABASE_PASSWORD'] %>
+ 
