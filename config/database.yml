@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: how-to-go_production
-  username: how-to-go
-  password: <%= ENV['HOW-TO-GO_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+ 
