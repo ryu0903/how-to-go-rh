@@ -1,6 +1,6 @@
 <% provide(:title, "Profile") %>
 <h1>Profile</h1>
 <%= gravatar_for(@user) %><br>
-<%= @user.id %>, <%= @user.name %>, <%= @user.email %>, <%= @user.sex %>
-<%= @user.introduction %><br>
+<%= @user.id %>, <%= @user.name %>, <%= @user.email %>
+<%= @user.introduce %><br>
 <% @user.created_at %>. <%= @user.updated_at %><br>
