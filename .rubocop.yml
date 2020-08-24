@@ -38,4 +38,6 @@ Style/MixinUsage:
 
 Style/MutableConstant:
   Enabled: false
-  
+
+Layout/TrailingWhitespace:
+  Enabled: false
