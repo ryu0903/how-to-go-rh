@@ -41,3 +41,9 @@ Style/MutableConstant:
 
 Layout/TrailingWhitespace:
   Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+  
+Style/RedundantSelf:
+  Enabled: false
