@@ -19,6 +19,30 @@ RSpec.describe "Sessions", type: :system do
       end
       
     end
+    
+    context "ログイン処理" do
+      it "無効なユーザーでのログイン失敗処理" do
+        fill_in "Email", with: "user@example.com"
+        fill_in "Password", with: "pass"
+        click_button "Log In"
+        expect(page).to have_content "Login failed"
+      end
+      
+      it "ヘッダーのログイン前後の表示確認" do
+        expect(page).to have_link 'Sign Up', href: signup_path
+        expect(page).to have_link 'Log In', href: login_path
+        expect(page).not_to have_link 'Log Out', href: logout_path
+        
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log In"
+        
+        expect(page).to have_link 'Users', href: users_path 
+        expect(page).to have_link 'Profile', href: user_path(user)
+        expect(page).to have_link 'Favorites', href: '#'
+        expect(page).to have_link 'Log Out', href: logout_path
+        expect(page).not_to have_link 'Log In', href: login_path
+      end
+    end
   end
-  
 end
