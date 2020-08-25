@@ -18,6 +18,10 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_title full_title("Log In")
       end
       
+      it "「Keep Login」のチェックボックスの表示確認" do
+        expect(page).to have_content 'Keep Login'
+        expect(page).to have_css 'input#session_remember_me'
+      end
     end
     
     context "ログイン処理" do
