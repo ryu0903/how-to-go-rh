@@ -1,0 +1,10 @@
+<% users.each do |user| %>
+  <li class="media">
+    <div class="media-body">
+      <%= gravatar_for user, size: 50 %>
+      <%= link_to user.name, user %>
+      | <%= link_to "Delete", user_path(user), method: :delete,
+                                          data: { confirm: "Are you OK？" } %>
+    </div>
+  </li>
+<% end %>
