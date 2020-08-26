@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   #user
   get 'signup', to: "users#new"
-  resources :users, only: [:index, :show, :new, :create]
+  resources :users
   
   #session
   get 'login', to: "sessions#new"

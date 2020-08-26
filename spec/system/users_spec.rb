@@ -43,6 +43,7 @@ RSpec.describe "Users", type: :system do
   describe "プロフィールページ" do
     context "ページレイアウト" do
       before do
+        login_for_system(user)
         visit user_path(user)
       end
     
@@ -58,6 +59,49 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content user.name
         expect(page).to have_content user.introduce
       end
+      
+      it "プロフィール編集ページへのリンク" do
+        expect(page).to have_link 'Edit Profile', href: edit_user_path(user)
+      end
+      
+    end
+  end
+  
+  describe "プロフィール編集ページ" do
+    before do
+      login_for_system(user)
+      visit user_path(user)
+      click_link 'Edit Profile'
+    end
+    
+    context "ページレイアウト" do
+      it "正しいタイトルの表示確認" do
+        expect(page).to have_title full_title('Edit Profile')
+      end
+    end
+    
+    it "有効なプロフィール更新" do
+      fill_in "Name", with: "Example User for edit"
+      fill_in "Email", with: "edit-user@example.com"
+      fill_in "Introduction", with: "こんばんは"
+      click_button "Update"
+      
+      expect(page).to have_content "Profile Updated"
+      expect(user.reload.name).to eq "Example User for edit"
+      expect(user.reload.email).to eq "edit-user@example.com"
+      expect(user.reload.introduce).to eq "こんばんは"
+    end
+    
+    it "無効なプロフィール更新" do
+      fill_in "Name", with: ""
+      fill_in "Email", with: ""
+      click_button "Update"
+      
+      expect(page).to have_content "Profile update failed"
+      expect(page).to have_content 'Nameを入力してください'
+      expect(page).to have_content 'Emailを入力してください'
+      expect(page).to have_content 'Emailは不正な値です'
+      expect(user.reload.email).not_to eq ""
     end
   end
 end
