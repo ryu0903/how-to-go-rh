@@ -28,6 +28,11 @@
             
             <%= f.submit 'Update', class: 'btn btn-primary btn-block' %>
             
+            <p></p>
+            
+            <%= link_to "Delete Account", user_path(@user), method: :delete,
+                                          data: { confirm: "Are you OK？" } %>
+            
         <% end %>
     </div>
 </div>
