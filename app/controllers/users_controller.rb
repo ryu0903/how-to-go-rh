@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.all.page(params[:page])
   end
   
   def create
@@ -39,6 +40,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def destroy
+    @user.destroy
+    flash[:success] = "Delete Account"
+    redirect_to root_url
+  end  
   
   private
   

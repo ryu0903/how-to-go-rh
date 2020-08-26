@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   
+  describe "ユーザー一覧ページ" do
+    it "ページネーション、削除ボタンの確認" do
+      create_list(:user, 31)
+      login_for_system(user)
+      visit users_path
+      expect(page).to have_css ".pagination"
+      
+      User.all.page(1).each do |u|
+        expect(page).to have_link u.name, href: user_path(u)
+      end
+    end
+  end
+    
   describe "ユーザー登録ページ" do
     before do
       visit signup_path
@@ -103,5 +116,7 @@ RSpec.describe "Users", type: :system do
       expect(page).to have_content 'Emailは不正な値です'
       expect(user.reload.email).not_to eq ""
     end
+    
   end
+  
 end
