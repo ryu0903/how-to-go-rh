@@ -52,7 +52,7 @@ class DestinationsController < ApplicationController
   private
   
     def destination_params
-      params.require(:destination).permit(:to, :from, :time, :date, :outline, :detail, :notice, :reference)
+      params.require(:destination).permit(:to, :from, :time, :date, :outline, :detail, :notice, :reference, :picture)
     end
     
     def correct_user

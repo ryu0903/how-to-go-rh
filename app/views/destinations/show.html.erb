@@ -2,7 +2,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <p>Picture</p>
+      <span class="picture">
+        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
+      </span>
       <div class="change-dish">
         <% if current_user == @destination.user %>
           <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
