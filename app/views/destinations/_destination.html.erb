@@ -1,0 +1,31 @@
+<% destinations.each do |destination| %>
+  <li class="media">
+    <div class="row media-body">
+      <div class="col-md-4">
+        <div>
+          <%= link_to gravatar_for(destination.user, size: 50), destination.user %>
+        </div>
+        <div>
+          <span class='edit'>
+            <% if current_user == destination.user %>
+              <%= link_to 'Edit', edit_destination_path(destination) %>
+            <% end %>
+          </span>
+          <span class='delete'>
+            <% if current_user.admin? || (current_user == destination.user) %>
+              <%= link_to 'Delete', destination_path(destination), method: :delete, data: { confirm: "Are you OK?" }  %>
+            <% end %>  
+          </span>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
+        <span class='from'>From: <%= destination.from %></span>
+        <span class='time'>Time: <%= destination.time %></span>
+        <span class='date'>Date: <%= destination.date %></span><br>
+        <span class='outline'><%= destination.outline %></span>
+        <span class='username'>User: <%= link_to destination.user.name, destination.user %></span>
+      </div>
+    </div>
+  </li>
+<% end %>

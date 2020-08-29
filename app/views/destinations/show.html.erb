@@ -1,0 +1,62 @@
+<% provide(:title, "Destination: #{@destination.to}") %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <p>Picture</p>
+      <div class="change-dish">
+        <% if current_user == @destination.user %>
+          <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
+        <% end %>
+        <% if current_user.admin? || (current_user == @destination.user) %>
+          <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
+        <% end %>  
+      </div>
+    </div>
+    
+    <div class="col-md-8">
+      <div>
+        <h5 class="destination-show-user">Posted by <%= link_to @destination.user.name, @destination.user %></h5>
+      </div>
+    
+      <div>
+        <h2 class="destination-show-h2">Destination</h2>
+        <h4 class="destination-show-h4"><%= @destination.to %></h4>
+      </div>
+    
+      <div>
+        <h2 class="destination-show-h2">From</h2>
+        <h4 class="destination-show-h4"><%= @destination.from %></h4>
+      </div>
+      
+      <div>
+        <h2 class="destination-show-h2">Time</h2>
+        <h4 class="destination-show-h4"><%= @destination.time %></h4>
+      </div>
+      
+      <div>
+        <h2 class="destination-show-h2">Date</h2>
+        <h4 class="destination-show-h4"><%= @destination.date %></h4>
+      </div>
+      
+      <div>
+        <h2 class="destination-show-h2">Outline</h2>
+        <h4 class="destination-show-h4"><%= @destination.outline %></h4>
+      </div>
+      
+      <div>
+        <h2 class="destination-show-h2">Detail</h2>
+        <h4 class="destination-show-h4"><%= @destination.detail %></h4>
+      </div>
+     
+      <div>
+        <h2 class="destination-show-h2">Notice/Advice</h2>
+        <h4 class="destination-show-h4"><%= @destination.notice %></h4>
+      </div>
+      
+      <div>
+        <h2 class="destination-show-h2">Reference</h2>
+        <h4 class="destination-show-h4"><%= @destination.reference %></h4>
+      </div>
+    </div>
+  </div>  
+</div>

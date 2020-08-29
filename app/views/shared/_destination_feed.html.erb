@@ -1,0 +1,6 @@
+<% if @feed_destination_items.any? %>
+  <ul class="destinations">
+    <%= render 'destinations/destination', destinations: @feed_destination_items %>
+  </ul>
+  <%= paginate @feed_destination_items %>
+<% end %>

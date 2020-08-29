@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
+  has_many :destinations, dependent: :destroy
   
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
@@ -19,6 +20,7 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+    
   end
   
   def remember
@@ -33,6 +35,10 @@ class User < ApplicationRecord
   
   def forget
     update_attribute(:remember_digest, nil)
+  end
+  
+  def destination_feed
+    Destination.where("user_id = ?", id)
   end
   
 end

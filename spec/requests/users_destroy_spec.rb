@@ -4,6 +4,7 @@ RSpec.describe "ユーザーの削除", type: :request do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
+  let!(:destination) { create(:destination, user: user) }
   
   context "管理者ユーザーの場合" do
     it "ユーザーを削除後、ユーザー一覧ページへリダイレクト" do
@@ -45,6 +46,15 @@ RSpec.describe "ユーザーの削除", type: :request do
       }.not_to change(User, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
+    end
+  end
+  
+  context "投稿と紐ずくユーザーを削除した場合" do
+    it "同時に投稿も削除" do
+      login_for_request(user)
+      expect { 
+        delete user_path(user)
+      }.to change(Destination, :count).by(-1)
     end
   end
 
