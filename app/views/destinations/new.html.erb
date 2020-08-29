@@ -1,8 +1,8 @@
-<% if logged_in? %>
-  <div class="container">
-    <h3 class="text-center mb-5">Everyone's Posts</h3>
+<% provide(:title, 'New Post') %>
+<div class="container">
+  <h3 class="text-center mb-5">New Post</h3>
     <main class="p-3 col-md-8 offset-md-2">
-      <ul class="nav nav-tabs nav-justified">
+      <ul class="nav nav-tabs nav-justified mb-3">
         <li class="nav-item">
           <a href="#destination" class="nav-link active" data-toggle="tab">Destination</a>
         </li>
@@ -13,18 +13,11 @@
 
       <div class="tab-content">
         <div id="destination" class="tab-pane active">
-          <%= render 'shared/destination_feed' %>
+          <%= render 'destinations/form' %>
         </div>
         <div id="schedule" class="tab-pane">
       
         </div>
       </div>
     </main>
-  </div>
-<% else %>
-  <div class="container">
-    <h1>What's How to Go?</h1>
-    <h2>How to Goは、「行き先」の共有に特化したサービスです。</h2>
-  </div>
-<% end %>
-    
+</div>

@@ -1,11 +1,12 @@
-<header>
+<header class="sticky-top">
   <div class="container"> 
-    <nav class="navbar navbar-fixed-top navbar-expand-md navbar-light bg-white">
+    <nav class="navbar navbar-expand-md navbar-light bg-white">
       
       <%= link_to(image_tag("How to Go-logo.png", :alt => ""), root_url, id: 'logo') %>
     
       <ul class="nav navber-nav ml-auto">
         <% if logged_in? %>
+          <li class="nav-item"><%= link_to 'New Post', new_destination_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>

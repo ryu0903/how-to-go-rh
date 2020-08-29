@@ -17,6 +17,26 @@
           <div class="profile-edit"><%= link_to 'Edit Profile', edit_user_path(@user) %></div>
         <% end %>
       </div>
+      
+      <main class="p-3 col-md-8 offset-md-2">
+        <ul class="nav nav-tabs nav-justified">
+          <li class="nav-item">
+            <a href="#post" class="nav-link active" data-toggle="tab">Posts</a>
+          </li>
+          <li class="nav-item">
+            <a href="#favorite" class="nav-link" data-toggle="tab">Favorites</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="post" class="tab-pane active">
+            <%= render 'users_posts' %>
+          </div>
+          <div id="favorite" class="tab-pane">
+            <%= render 'users_favorites' %>
+          </div>
+        </div>
+      </main>  
     </div>
   </div>
 
