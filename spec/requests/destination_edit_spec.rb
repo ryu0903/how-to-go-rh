@@ -4,8 +4,10 @@ RSpec.describe "Destination編集", type: :request do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, user: user) }
+  let!(:picture2_path) { File.join(Rails.root, 'spec/fixtures/test2.png') }
+  let!(:picture2) { Rack::Test::UploadedFile.new(picture2_path) }
   
-  describe "ログイン済ユーザーの場合" do
+  describe "ログイン済ユーザーの場合&フレンドリーフォワーディング" do
     it "正常なレスポンス" do
       get edit_destination_path(destination)
       login_for_request(user)
@@ -17,7 +19,8 @@ RSpec.describe "Destination編集", type: :request do
                                                                    outline: "bacation",
                                                                    detail: "airplane",
                                                                    notice: "very hot",
-                                                                   reference: "ANA" } }
+                                                                   reference: "ANA",
+                                                                   picture: picture2} }
       redirect_to destination
       follow_redirect!
       expect(response).to render_template('destinations/show')

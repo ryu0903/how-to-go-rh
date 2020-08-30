@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
-  let!(:destination) { create(:destination, user: user) }
+  let!(:destination) { create(:destination, :picture, user: user) }
   
   describe "Destination登録ページ" do
     before do
       login_for_system(user)
       visit new_destination_path
-     
     end
   
     context "ページレイアウト" do
@@ -41,9 +40,10 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Detail", with: "Take Shinkansen"
         fill_in "Notice/Advice", with: "Get off Shinagawa"
         fill_in "Reference", with: "https://jr-central.co.jp/"
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg"
         click_button "Post"
         expect(page).to have_content "Your Destination Posted!"
-       end
+      end
     
       it "無効なデータ登録、フラッシュメッセージ確認" do
         fill_in "Destination", with: ""
@@ -56,6 +56,21 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Reference", with: "https://jr-central.co.jp/"
         click_button "Post"
         expect(page).to have_content "Post failed"
+      end
+      
+        
+      it "画像なしで登録した場合、デフォルト画像を表示" do
+        fill_in "Destination", with: "Tokyo"
+        fill_in "From", with: "Hiroshima"
+        fill_in "Time", with: "4 hours"
+        fill_in "Date", with: "2020/8/1"
+        fill_in "Outline", with: "very far"
+        fill_in "Detail", with: "Take Shinkansen"
+        fill_in "Notice/Advice", with: "Get off Shinagawa"
+        fill_in "Reference", with: "https://jr-central.co.jp/"
+        click_button "Post"
+        expect(page).to have_content "Your Destination Posted!"
+        expect(destination.picture.url).to include "test.jpg"
       end
     end
   end
@@ -81,6 +96,7 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content destination.detail
         expect(page).to have_content destination.notice
         expect(page).to have_content destination.reference
+        expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture"
       end
     end
     
@@ -138,6 +154,7 @@ RSpec.describe "Destinations", type: :system do
         expect(destination.reload.detail).to eq "Take Shinkansen"
         expect(destination.reload.notice).to eq "Get off Shinagawa"
         expect(destination.reload.reference).to eq "https://jr-central.co.jp/"
+        expect(destination.reload.picture.url).to include "test.jpg"
       end  
       
       it "無効な更新" do
@@ -155,5 +172,5 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content 'Your Post Deleted'
       end
     end
-  end  
+  end
 end

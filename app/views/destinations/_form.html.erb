@@ -12,6 +12,7 @@
   <span class="picture">
     <%= f.label :picture %>　<span class="optional">※Optional</span>
     <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'destination_picture' %>
+    <%= image_tag(@destination.picture.thumb400.url) if @destination.picture.url.present? %>
   </span>
   
   <div class="form-group">
@@ -55,4 +56,5 @@
   </div>
   
   <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+  
 <% end %>
