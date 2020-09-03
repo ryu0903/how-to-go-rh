@@ -43,8 +43,8 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
   
-  def destination_feed
-    Destination.where("user_id = ?", id)
+  def feed_destination
+    Destination.where(user_id: self.following_ids + [self.id])
   end
   
   def follow(other_user)
