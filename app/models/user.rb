@@ -1,6 +1,12 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   has_many :destinations, dependent: :destroy
+  #follow
+  has_many :follow_relationships, class_name: "Relationship", foreign_key: "user_id", dependent: :destroy
+  has_many :followings, through: :follow_relationships, source: :follow
+  #followed
+  has_many :followed_relationships, class_name: "Relationship", foreign_key: "follow_id",dependent: :destroy
+  has_many :followers, through: :followed_relationships, source: :user
   
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
@@ -39,6 +45,25 @@ class User < ApplicationRecord
   
   def destination_feed
     Destination.where("user_id = ?", id)
+  end
+  
+  def follow(other_user)
+    unless self == other_user
+      self.follow_relationships.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+  
+  def unfollow(other_user)
+    relationship = self.follow_relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+  
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
+  
+  def followed_by?(other_user)
+    self.followers.include?(other_user)
   end
   
 end

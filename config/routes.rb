@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   
   #user
   get 'signup', to: "users#new"
-  resources :users
+  resources :users do
+    member do
+      get :followings, :followers
+    end
+  end
   
   #session
   get 'login', to: "sessions#new"
@@ -13,5 +17,8 @@ Rails.application.routes.draw do
   
   #destination
   resources :destinations
+  
+  #relationship
+  resources :relationships, only: [:create, :destroy]
   
 end

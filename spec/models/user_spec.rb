@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
  
   context "バリデーション" do
     
@@ -56,6 +57,20 @@ RSpec.describe User, type: :model do
   context "authenticated?メソッド" do
     it "ダイジェストが存在しない場合、falseを返すこと" do
       expect(user.authenticated?('')).to eq false
+    end
+  end
+  
+  context "フォロー機能" do
+    it "フォロー/アンフォローの機能の動作確認" do
+      #フォロー状況確認
+      expect(user.following?(other_user)).to be_falsey
+      #フォロー
+      user.follow(other_user)
+      expect(user.following?(other_user)).to be_truthy #フォローしたか
+      expect(other_user.followed_by?(user)).to be_truthy #フォローされたか
+      #アンフォロー
+      user.unfollow(other_user)
+      expect(user.following?(other_user)).to be_falsey
     end
   end
   
