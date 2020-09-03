@@ -43,6 +43,7 @@ RSpec.describe "Destinations", type: :system do
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg"
         click_button "Post"
         expect(page).to have_content "Your Destination Posted!"
+      
       end
     
       it "無効なデータ登録、フラッシュメッセージ確認" do

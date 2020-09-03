@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let!(:other_user) { create(:user) }
   
   describe "ユーザー一覧ページ" do
     context "管理者ユーザーの場合" do
@@ -119,8 +120,20 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_link destination.user.name, href: user_path(destination.user)
         end
       end
-      
     end
+      
+    context "ユーザーのフォロー/フォロー解除処理", js: true do
+      it "フォロー/フォロー解除ができること" do
+        login_for_system(user)
+        visit user_path(other_user)
+        expect(page).to have_button "Follow"
+        click_button "Follow"
+        expect(page).to have_button "Following"
+        click_button "Following"
+        expect(page).to have_button "Follow"
+      end
+    end
+  
   end
   
   describe "プロフィール編集ページ" do

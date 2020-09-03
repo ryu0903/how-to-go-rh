@@ -1,0 +1,26 @@
+<% if followings.any? %>
+  <ul class="list-unstyled">
+    <% followings.each do |following| %>
+      <li class="media feed-follow">
+        <div class="media-body ">
+          <%= gravatar_for following, size: 50 %>
+          <%= link_to following.name, following %>
+          <% unless current_user?(following) %>
+            <% if current_user.following?(following) %>
+              <%= form_with(model: current_user.follow_relationships.find_by(follow_id: following.id), local: true, method: :delete) do |f| %>
+                <%= hidden_field_tag :follow_id, following.id %>
+                <%= f.submit 'Following', class: "btn btn-danger feed-follow-button" %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= form_with(model: current_user.follow_relationships.build, local: true) do |f| %>
+              <%= hidden_field_tag :follow_id, user.id %>
+              <%= f.submit 'Follow', class: "btn btn-primary feed-follow-button" %>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>  
+   </ul>
+  <%= paginate followings, param_name: :followings_page %>
+<% end %>
