@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   #relationship
   resources :relationships, only: [:create, :destroy]
   
+  
 end

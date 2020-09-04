@@ -7,6 +7,8 @@ class User < ApplicationRecord
   #followed
   has_many :followed_relationships, class_name: "Relationship", foreign_key: "follow_id",dependent: :destroy
   has_many :followers, through: :followed_relationships, source: :user
+  #destination_favorite
+  has_many :destination_favorite, dependent: :destroy
   
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }

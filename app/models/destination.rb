@@ -1,5 +1,7 @@
 class Destination < ApplicationRecord
   belongs_to :user
+  has_many :destination_favorite, dependent: :destroy
+  
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   

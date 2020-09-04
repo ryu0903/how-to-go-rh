@@ -1,0 +1,2 @@
+module DestinationFavoritesHelper
+end

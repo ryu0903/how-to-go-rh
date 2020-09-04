@@ -2,10 +2,12 @@
   <ul class="list-unstyled">
     <% users.each do |user| %>
       <li class="media feed-follow">
-        <div id="feed_follow_button" class="media-body ">
+        <div class="media-body ">
           <%= gravatar_for user, size: 50 %>
           <%= link_to user.name, user %>
-          <%= render 'feed_follow_button', user: user %>
+        </div>
+        <div id="follow_button" data-turbolinks="false" class="feed-follow-button">
+          <%= render 'follow_button', user: user %>
         </div>
       </li>
     <% end %>

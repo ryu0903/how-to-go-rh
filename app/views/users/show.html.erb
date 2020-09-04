@@ -20,7 +20,7 @@
         <% if current_user == @user %>
           <div class="profile-edit"><%= link_to 'Edit Profile', edit_user_path(@user) %></div>
         <% else %>
-          <div id="follow_button">
+          <div id="follow_button" data-turbolinks="false">
             <%= render 'users/follow_button', user: @user %>
           </div>
         <% end %>
@@ -37,11 +37,14 @@
         </ul>
 
         <div class="tab-content">
-          <div id="post" class="tab-pane active">
-            <%= render 'users_posts' %>
+          <div id="post" class="tab-pane active destinations">
+            <%if @user.destinations.any? %>
+              <%= render 'destinations/destination', destinations: @destinations %>
+              <%= paginate @destinations %>
+            <% end %>
           </div>
           <div id="favorite" class="tab-pane">
-            <%= render 'users_favorites' %>
+            
           </div>
         </div>
       </main>  
