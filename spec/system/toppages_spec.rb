@@ -29,7 +29,6 @@ RSpec.describe "Toppages", type: :system do
         create_list(:destination, 10, user: user)
         visit root_path
         expect(page).to have_content "Everyone's Posts"
-        click_on "Destination"
         expect(page).to have_css ".pagination"
         Destination.take(5).each do |d|
           expect(page).to have_link d.user.name, href: user_path(d.user)

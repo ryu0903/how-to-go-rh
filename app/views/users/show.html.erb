@@ -20,7 +20,7 @@
         <% if current_user == @user %>
           <div class="profile-edit"><%= link_to 'Edit Profile', edit_user_path(@user) %></div>
         <% else %>
-          <div id="follow_button">
+          <div id="follow_button" data-turbolinks="false">
             <%= render 'users/follow_button', user: @user %>
           </div>
         <% end %>
@@ -29,22 +29,21 @@
       <main class="p-3 col-md-8 offset-md-2">
         <ul class="nav nav-tabs nav-justified">
           <li class="nav-item">
-            <a href="#post" class="nav-link active" data-toggle="tab">Posts</a>
+            <a href="<%= user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(user_path(@user)) %>">
+              Posts
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#favorite" class="nav-link" data-toggle="tab">Favorites</a>
+            <a href="#" class="nav-link">
+              Favorites
+            </a>
           </li>
         </ul>
-
-        <div class="tab-content">
-          <div id="post" class="tab-pane active">
-            <%= render 'users_posts' %>
-          </div>
-          <div id="favorite" class="tab-pane">
-            <%= render 'users_favorites' %>
-          </div>
+        <div class="destinations">
+          <%= render 'destinations/destination', destinations: @destinations %>
+          <%= paginate @destinations %>
         </div>
-      </main>  
+      </main>
     </div>
   </div>
 

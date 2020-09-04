@@ -13,7 +13,7 @@
       <ul class="nav nav-tabs nav-justified">
         <li class="nav-item">
           <a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">
-            Follow <span class="badge badge-secondary"><%= @user.followings.count %></span>
+            Follow <span data-turbolinks="false" class="badge badge-secondary"><%= @user.followings.count %></span>
           </a>
         </li> 
         <li class="nav-item">
