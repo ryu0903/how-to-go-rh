@@ -12,6 +12,7 @@
         <% if current_user.admin? || (current_user == @destination.user) %>
           <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
         <% end %>  
+        <%= render 'users/favorite_form', destination: @destination %>
       </div>
     </div>
     

@@ -1,0 +1,9 @@
+<% unless current_user == destination.user %>
+  <div id="favorite_form_<%= destination.id %>">
+    <% if current_user.favorite?(destination) %>
+      <%= render 'users/unfavorite', destination: destination %>
+    <% else %>
+      <%= render 'users/favorite', destination: destination %>
+    <% end %>
+  </div>  
+<% end %>

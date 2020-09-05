@@ -1,0 +1,1 @@
+$("#favorite_form_<%= @destination.id %>").html("<%= j(render(partial: 'users/unfavorite', locals: { destination: @destination } )) %>");

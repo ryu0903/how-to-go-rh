@@ -4,6 +4,9 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
+  let!(:destination) { create(:destination, user: user) }
+
+  
   
   describe "ユーザー一覧ページ" do
     context "管理者ユーザーの場合" do
@@ -122,6 +125,69 @@ RSpec.describe "Users", type: :system do
       end
     end
       
+    context "お気に入り登録・解除" do
+      let!(:destination2) { create(:destination, user: other_user) }
+      before do
+        create(:relationship, user_id: user.id, follow_id: other_user.id) 
+        login_for_system(user)
+      end
+        
+      it "投稿のお気に入り登録/解除" do
+        expect(user.favorite?(destination)).to be_falsey
+        user.favorite(destination)
+        expect(user.favorite?(destination)).to be_truthy
+        user.unfavorite(destination)
+        expect(user.favorite?(destination)).to be_falsey
+      end
+      
+        it "トップページからお気に入り登録・解除ができること", js: true do
+        visit root_path
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/create"
+        link.click 
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/create"
+      end
+      
+      it "詳細ページからお気に入り登録・解除ができること", js: true do
+        visit destination_path(destination2)
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/create"
+        link.click 
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/create"
+      end
+      
+      it "一覧ページからお気に入り登録・削除ができること", js: true do
+        user.favorite(destination2)
+        visit favorites_user_path(user)
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination2.id}/create"
+      end
+      
+      it "お気に入り一覧ページ" do
+        user.favorite(destination2)
+        visit favorites_user_path(user)
+        expect(page).to have_css ".favorite_destination", count: 1
+        expect(page).to have_link destination2.to
+        expect(page).to have_content destination2.from
+        expect(page).to have_content destination2.time
+        expect(page).to have_content destination2.date
+        expect(page).to have_content destination2.outline
+        expect(page).to have_link destination2.user.name, href: user_path(destination2.user)
+      end  
+      
+    end
+      
     context "ユーザーのフォロー/フォロー解除処理", js: true do
       it "フォロー/フォロー解除ができること" do
         login_for_system(user)
@@ -133,7 +199,6 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_button "Follow"
       end
     end
-  
   end
   
   describe "プロフィール編集ページ" do
@@ -180,7 +245,6 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content "Deleted your account"
       end
     end
-    
   end
   
 end

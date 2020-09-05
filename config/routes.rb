@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'signup', to: "users#new"
   resources :users do
     member do
-      get :followings, :followers
+      get :followings, :followers, :favorites
     end
   end
   
@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   
   #favorite
   post "favorites/:destination_id/create", to: "favorites#create"
-  delete "favorites/:destination_id/delete", to: "favorites#destroy"
+  delete "favorites/:destination_id/destroy", to: "favorites#destroy"
   
 end

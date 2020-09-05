@@ -1,4 +1,4 @@
-<% provide(:title, "Profile") %>
+<% provide(:title, "Favorite") %>
   <div class="container">
     <h3 class="title-profile">Profile</h3>
     <div class="row">
@@ -25,7 +25,7 @@
       </div>
       
       <main class="p-3 col-md-8 offset-md-2">
-        <h1>Posts</h1>
+        <h1>Favorites</h1>
         <ul class="nav nav-tabs nav-justified">
           <li class="nav-item">
             <a href="<%= user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(user_path(@user)) %>">
@@ -39,10 +39,9 @@
           </li>
         </ul>
         <div class="feed">
-          <%= render 'destinations/destination', destinations: @destinations %>
-          <%= paginate @destinations %>
+          <%= render 'favorites/favorites', favorites: @favorites %>
+          <%= paginate @favorites %>
         </div>
       </main>
     </div>
   </div>
-
