@@ -22,13 +22,15 @@ RSpec.describe "ユーザーフォロー機能", type: :request do
     end
     
     it "フォロー解除ができること" do
+      user.follow(other_user)
       relationship = user.follow_relationships.find_by(follow_id: other_user.id)
       expect {
         delete relationship_path(relationship)
       }.to change(user.followings, :count).by(-1)
     end
     
-    it "フォロー解除ができること" do
+    it "Ajaxによるフォロー解除ができること" do
+      user.follow(other_user)
       relationship = user.follow_relationships.find_by(follow_id: other_user.id)
       expect {
         delete relationship_path(relationship), xhr: true

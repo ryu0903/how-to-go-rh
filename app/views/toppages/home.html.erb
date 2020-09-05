@@ -1,13 +1,11 @@
 <% if logged_in? %>
   <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h3 class="text-center mb-5">Everyone's Posts</h3>
-        <div>
+    <h3 class="text-center mb-5">Everyone's Posts</h3>
+    <main class="p-3 col-md-8 offset-md-2">
+        <div id="destination" class="feed">
           <%= render 'shared/destination_feed' %>
         </div>
-      </div>
-    </div>
+    </main>
   </div>
 <% else %>
   <div class="container">

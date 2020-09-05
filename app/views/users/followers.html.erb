@@ -1,24 +1,31 @@
 <% provide(:title, @title) %>
 <div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <div>
-        <%= gravatar_for @user %>
-        <h2 class="follow-profile"><%= link_to @user.name, @user %></h2>
+  <h3 class="title-profile">Follow/Follower</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <%= gravatar_for @user, size: 120 %>
       </div>
-    </div>
+      
+      <div class="col-md-8">
+        <h4 class="show-user-name"><%= link_to @user.name, user_path(@user) %></h4>
+      
+        <div>
+          <%= @user.introduce %>
+        </div>
+        
+      </div>
 
-    <main class="col-md-8">
+    <main class="p3 col-md-8 offset-md-2">
       <h1>Follower</h1>
       <ul class="nav nav-tabs nav-justified">
         <li class="nav-item">
           <a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">
-            Follow <span class="badge badge-secondary" data-turbolinks="false" id="followings"><%= @user.followings.count %></span>
+            Follow 
           </a>
         </li> 
         <li class="nav-item">
           <a href="<%= followers_user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(followers_user_path(@user)) %>">
-            Follower <span class="badge badge-secondary"><%= @user.followers.count %></span>
+            Follower 
           </a>
         </li>
       </ul>

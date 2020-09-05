@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :followings, :followers]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :followings, :followers, :favorites]
   before_action :correct_user, only: [:edit, :update]
   
   def new
@@ -72,6 +72,10 @@ class UsersController < ApplicationController
     @followers = @user.followers.page(params[:page]).per(10)
   end
   
+  def favorites
+    @user = User.find(params[:id])
+    @favorites = @user.favorites.page(params[:page]).per(5)
+  end
   
   private
   
