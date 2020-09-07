@@ -218,3 +218,34 @@ footer {
 .unfavorite {
     color: red;
 }
+
+.more {
+    color: gray;
+    cursor: pointer;
+}
+
+.destination-show-h4-commentfeed{
+    margin-left: 70px;
+    margin-bottom: 30px;
+}
+
+.comment-feed {
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom : 10px;
+    
+    .comment-user {
+        margin-bottom: 10px;
+    }
+    .comment-text {
+        margin-bottom: 10px;
+    }
+    .comment-date{
+        text-align: right;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+}
+
+.comment-button {
+    margin-top: 10px;
+}

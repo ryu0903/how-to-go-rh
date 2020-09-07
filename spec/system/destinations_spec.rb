@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, :picture, user: user) }
   
+ 
   describe "Destination登録ページ" do
     before do
       login_for_system(user)
@@ -32,44 +34,88 @@ RSpec.describe "Destinations", type: :system do
   
     context "Destination登録" do
       it "有効なデータ登録、フラッシュメッセージ確認" do
-        fill_in "Destination", with: "Tokyo"
-        fill_in "From", with: "Hiroshima"
-        fill_in "Time", with: "4 hours"
-        fill_in "Date", with: "2020/8/1"
-        fill_in "Outline", with: "very far"
-        fill_in "Detail", with: "Take Shinkansen"
-        fill_in "Notice/Advice", with: "Get off Shinagawa"
-        fill_in "Reference", with: "https://jr-central.co.jp/"
-        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg"
-        click_button "Post"
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Time", with: "4 hours", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        fill_in "Detail", with: "Take Shinkansen", match: :first
+        fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
+        fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
+        click_button "Post", match: :first
         expect(page).to have_content "Your Destination Posted!"
       
       end
     
       it "無効なデータ登録、フラッシュメッセージ確認" do
-        fill_in "Destination", with: ""
-        fill_in "From", with: "Hiroshima"
-        fill_in "Time", with: "4 hours"
-        fill_in "Date", with: "2020/8/1"
-        fill_in "Outline", with: "very far"
-        fill_in "Detail", with: "Take Shinkansen"
-        fill_in "Notice/Advice", with: "Get off Shinagawa"
-        fill_in "Reference", with: "https://jr-central.co.jp/"
-        click_button "Post"
+        fill_in "Destination", with: "", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Time", with: "4 hours", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        fill_in "Detail", with: "Take Shinkansen", match: :first
+        fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
+        fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
+        click_button "Post", match: :first
         expect(page).to have_content "Post failed"
       end
       
         
       it "画像なしで登録した場合、デフォルト画像を表示" do
-        fill_in "Destination", with: "Tokyo"
-        fill_in "From", with: "Hiroshima"
-        fill_in "Time", with: "4 hours"
-        fill_in "Date", with: "2020/8/1"
-        fill_in "Outline", with: "very far"
-        fill_in "Detail", with: "Take Shinkansen"
-        fill_in "Notice/Advice", with: "Get off Shinagawa"
-        fill_in "Reference", with: "https://jr-central.co.jp/"
-        click_button "Post"
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Time", with: "4 hours", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        fill_in "Detail", with: "Take Shinkansen", match: :first
+        fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
+        fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
+        click_button "Post", match: :first
+        expect(page).to have_content "Your Destination Posted!"
+        expect(destination.picture.url).to include "test.jpg"
+      end
+    end
+    
+    context "Schedule登録" do
+      before do
+        click_on "Schedule"
+      end
+      
+      it "入力フォームのラベル確認" do
+        expect(page).to have_content "Destination"
+        expect(page).to have_content "From"
+        expect(page).to have_content "Date"
+        expect(page).to have_content "Outline"
+      end
+      
+      it "有効なデータ登録、フラッシュメッセージ確認" do
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
+        click_button "Post", match: :first
+        expect(page).to have_content "Your Destination Posted!"
+      end
+    
+      it "無効なデータ登録、フラッシュメッセージ確認" do
+        fill_in "Destination", with: "", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
+        click_button "Post", match: :first
+        expect(page).to have_content "Post failed"
+      end
+      
+        
+      it "画像なしで登録した場合、デフォルト画像を表示" do
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Date", with: "2020/8/1", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        click_button "Post", match: :first
         expect(page).to have_content "Your Destination Posted!"
         expect(destination.picture.url).to include "test.jpg"
       end
@@ -110,6 +156,36 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content 'Your Post Deleted'
       end
     end
+    
+    context "コメントの登録・削除", js: true do
+      it "自分のコメントの登録・削除が正常に行われること" do
+        login_for_system(user)
+        visit destination_path(destination)
+        fill_in "comment_content", with: "こんにちは"
+        click_button "Comment"
+        within find("#comment-#{Comment.last.id}") do
+          expect(page).to have_content user.name
+          expect(page).to have_content "こんにちは"
+        end
+        link = find('.comment-delete-button')
+        link.click
+        expect(page).not_to have_content "こんにちは"
+      end
+      
+      context "別のユーザーのコメントの場合" do
+        let!(:comment) { create(:comment, user: user, destination: destination) }
+        it "別ユーザーのコメントには削除ボタンがないこと" do
+          login_for_system(other_user)
+          visit destination_path(destination)
+            
+          within find("#comment-#{comment.id}") do
+            expect(page).to have_content "私も行ってみたいです"
+            expect(page).to have_content comment.user.name
+            expect(page).not_to have_css ('.comment-delete-button')
+          end
+        end
+      end
+    end
   end
   
   describe "Destination編集ページ" do
@@ -117,9 +193,10 @@ RSpec.describe "Destinations", type: :system do
       login_for_system(user)
       visit destination_path(destination)
       click_link "Edit"
+      click_on 'Destination'
     end
     
-    context "ページレイアウト" do
+    context "ペー���レイアウト" do
       it "正しいタイトルの表示確認" do
         expect(page).to have_title full_title("Edit: #{destination.to}")
       end
@@ -137,15 +214,15 @@ RSpec.describe "Destinations", type: :system do
     
     context "Destination編集" do
       it "有効なデータ更新、フラッシュメッセージ確認" do
-        fill_in "Destination", with: "Tokyo"
-        fill_in "From", with: "Hiroshima"
-        fill_in "Time", with: "4 hours"
-        fill_in "Date", with: "2020-08-01"
-        fill_in "Outline", with: "very far"
-        fill_in "Detail", with: "Take Shinkansen"
-        fill_in "Notice/Advice", with: "Get off Shinagawa"
-        fill_in "Reference", with: "https://jr-central.co.jp/"
-        click_button "Update"
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Time", with: "4 hours", match: :first
+        fill_in "Date", with: "2020-08-01", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        fill_in "Detail", with: "Take Shinkansen", match: :first
+        fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
+        fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
+        click_button "Update", match: :first
         expect(page).to have_content "Your Post Updated!"
         expect(destination.reload.to).to eq "Tokyo"
         expect(destination.reload.from).to eq "Hiroshima"
@@ -159,10 +236,51 @@ RSpec.describe "Destinations", type: :system do
       end  
       
       it "無効な更新" do
-        fill_in "Destination", with: ""
-        click_button "Update"
+        fill_in "Destination", with: "", match: :first
+        click_button "Update", match: :first
         expect(page).to have_content "Update failed"
         expect(destination.reload.to).not_to eq ""
+      end
+    end
+    
+     context "Schedule登録" do
+      before do
+        click_on "Schedule"
+      end
+      
+      it "入力フォームのラベル確認" do
+        expect(page).to have_content "Destination"
+        expect(page).to have_content "From"
+        expect(page).to have_content "Date"
+        expect(page).to have_content "Outline"
+      end
+      
+      it "有効な更新、フラッシュメッセージ確認" do
+        fill_in "Destination", with: "Tokyo", match: :first
+        fill_in "From", with: "Hiroshima", match: :first
+        fill_in "Time", with: "", match: :first
+        fill_in "Date", with: "2020-08-01", match: :first
+        fill_in "Outline", with: "very far", match: :first
+        fill_in "Detail", with: "", match: :first
+        fill_in "Notice/Advice", with: "", match: :first
+        fill_in "Reference", with: "", match: :first
+        click_button "Update", match: :first
+        expect(page).to have_content "Your Post Updated!"
+        expect(destination.reload.to).to eq "Tokyo"
+        expect(destination.reload.from).to eq "Hiroshima"
+        expect(destination.reload.time).not_to eq "4 hours"
+        expect(destination.reload.date).to eq "2020-08-01"
+        expect(destination.reload.outline).to eq "very far"
+        expect(destination.reload.detail).not_to eq "Take Shinkansen"
+        expect(destination.reload.notice).not_to eq "Get off Shinagawa"
+        expect(destination.reload.reference).not_to eq "https://jr-central.co.jp/"
+        expect(destination.reload.picture.url).to include "test.jpg"
+      end
+    
+      it "無効な更新、フラッシュメッセージ確認" do
+        fill_in "Destination", with: "", match: :first
+        click_button "Update", match: :first
+        expect(page).to have_content "Update failed"
       end
     end
     

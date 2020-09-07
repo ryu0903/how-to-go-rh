@@ -35,23 +35,10 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:from]).to include("は30文字以内で入力してください")
     end
     
-    it "所要時間がなければ無効" do
-      destination = build(:destination, time: nil)
-      destination.valid?
-      expect(destination.errors[:time]).to include("を入力してください")
-    end
-    
-    
     it "日付がなければ無効" do
       destination = build(:destination, date: nil)
       destination.valid?
       expect(destination.errors[:date]).to include("を入力してください")
-    end
-    
-    it "詳細がなければ無効" do
-      destination = build(:destination, detail: nil)
-      destination.valid?
-      expect(destination.errors[:detail]).to include("を入力してください")
     end
     
     it "ユーザーIDがなければ無効" do

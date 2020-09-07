@@ -8,6 +8,8 @@ class DestinationsController < ApplicationController
   
   def show
     @destination = Destination.find(params[:id])
+    @comment = Comment.new
+    @comments = @destination.comments
   end
   
   def create
