@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_071337) do
+ActiveRecord::Schema.define(version: 2020_09_07_165732) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "destination_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_comments_on_destination_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "to"
     t.string "from"
-    t.date "date"
+    t.string "date"
     t.text "outline"
     t.text "detail"
     t.text "notice"
@@ -59,6 +69,8 @@ ActiveRecord::Schema.define(version: 2020_09_04_071337) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "comments", "destinations"
+  add_foreign_key "comments", "users"
   add_foreign_key "destinations", "users"
   add_foreign_key "favorites", "destinations"
   add_foreign_key "favorites", "users"

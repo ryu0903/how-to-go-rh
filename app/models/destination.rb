@@ -1,15 +1,14 @@
 class Destination < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   
   validates :user_id, presence: true
   validates :to, presence: true, length: { maximum: 30 }
   validates :from, presence: true, length: { maximum: 30 }
-  validates :time, presence: true
   validates :date, presence: true
-  validates :detail, presence: true
   validate :picture_size
   
   private

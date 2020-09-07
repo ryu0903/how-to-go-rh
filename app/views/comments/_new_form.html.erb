@@ -1,0 +1,11 @@
+<%= form_with(model: @comment) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <%= hidden_field_tag :destination_id, @destination.id %>
+      <div>
+        <%= f.text_area :content, class: "form-control", placeholder: "Add comment" %>
+      </div>
+      <div class="comment-button">
+        <%= f.submit "Comment", class: "btn btn-primary" %>
+      </div>
+    
+<% end %>  

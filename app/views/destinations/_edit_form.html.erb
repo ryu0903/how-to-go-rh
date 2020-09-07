@@ -1,0 +1,61 @@
+<%= form_with model: @destination, local: true do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+    <script type="text/javascript">
+      $('#dish_picture').bind('change', function() {
+      var size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert('アップロードできる写真の最大サイズは5MBです。5MB以下の画像を選択してください');
+        }
+        });
+    </script>
+        
+        <span class="picture">
+          <%= f.label :picture %>　<span class="input-unneed">※任意</span>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'dish-picture' %>
+          <%= image_tag(@destination.picture.thumb400.url) if @destination.picture.url.present? %>
+        </span>
+      
+        <div class="form-group">
+          <%= f.label :to, 'Destination' %>　<span class="required">※Required</span>
+          <%= f.text_field :to, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :from %>　<span class="required">※Required</span>
+          <%= f.text_field :from, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :time %>　<span class="required">※Required</span>
+          <%= f.text_field :time, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :date %>　<span class="required">※Required</span>
+          <%= f.date_field :date, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :outline %>　<span class="optional">※Optional</span>
+          <%= f.text_field :outline, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :detail %>　<span class="required">※Required</span>
+          <%= f.text_area :detail, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :notice, 'Notice/Advice' %> <span class="optional">※Optional</span>
+          <%= f.text_area :notice, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :reference %>　<span class="optional">※Optional</span>
+          <%= f.text_area :reference, class: "form-control" %>
+        </div>
+        
+        <%= f.submit 'Update', class: 'btn btn-primary btn-block' %>
+  <% end %>
+  <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" }  %>
+      

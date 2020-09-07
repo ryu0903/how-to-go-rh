@@ -1,0 +1,3 @@
+$("#comment_feed").html("<%= j(render(partial: 'comments/comment', locals: { comments: @comment.destination.comments  } )) %>");
+$("textarea").val('')
+$("#comment_count").html('<%= @destination.comments.count %>');

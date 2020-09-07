@@ -1,0 +1,49 @@
+<% comments.first(3).each do |comment| %>
+  <div id="comment-<%= comment.id %>" class="comment-feed">
+    <% unless comment.id.nil? %>
+      <li class="comment-container list-unstyled">
+        <div class="comment-user">
+          <%= link_to comment.user.name, user_path(comment.user) %>
+        </div>
+        <div class="comment-text">
+          <%= comment.content %>
+          <% if current_user == comment.user %>
+            <%= link_to comment_path(comment), method: :delete, remote: true do %>
+              <i class="comment-delete-button fas fa-trash" style="color: gray;"></i>
+            <% end %>
+          <% end %>  
+        </div>
+        <div class="comment-date">
+           <%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+        </div>
+      </li>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="collapse" id="collapseExample">
+  <% comments.offset(3).each do |comment| %>
+    <div id="comment-<%= comment.id %>" class="comment-feed">
+      <% unless comment.id.nil? %>
+        <li class="comment-container list-unstyled">
+          <div class="comment-user">
+            <%= link_to comment.user.name, user_path(comment.user) %>
+          </div>
+          <div class="comment-text">
+            <%= comment.content %>
+            <% if current_user == comment.user %>
+              <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                <i class="comment-delete-button fas fa-trash" style="color: gray;"></i>
+              <% end %>
+            <% end %>  
+          </div>
+          <div class="comment-date">
+           <%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h6 class="more" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="color: gray, cursor: pointer;">More comments</h6>

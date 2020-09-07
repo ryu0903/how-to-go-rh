@@ -32,34 +32,55 @@
       </div>
       
       <div>
-        <h2 class="destination-show-h2">Time</h2>
-        <h4 class="destination-show-h4"><%= @destination.time %></h4>
-      </div>
-      
-      <div>
         <h2 class="destination-show-h2">Date</h2>
         <h4 class="destination-show-h4"><%= @destination.date %></h4>
       </div>
       
+      <% unless @destination.time.blank? %>
+      <div>
+        <h2 class="destination-show-h2">Time required</h2>
+        <h4 class="destination-show-h4"><%= @destination.time %></h4>
+      </div>
+      <% end %>
+      
+      <% unless @destination.outline.blank? %>
       <div>
         <h2 class="destination-show-h2">Outline</h2>
         <h4 class="destination-show-h4"><%= @destination.outline %></h4>
       </div>
+      <% end %>
       
+      <% unless @destination.detail.blank? %>
       <div>
         <h2 class="destination-show-h2">Detail</h2>
         <h4 class="destination-show-h4"><%= @destination.detail %></h4>
       </div>
+      <% end %>
      
+      <% unless @destination.notice.blank? %>
       <div>
         <h2 class="destination-show-h2">Notice/Advice</h2>
         <h4 class="destination-show-h4"><%= @destination.notice %></h4>
       </div>
+      <% end %>
       
+      <% unless @destination.reference.blank? %>
       <div>
         <h2 class="destination-show-h2">Reference</h2>
         <h4 class="destination-show-h4"><%= @destination.reference %></h4>
       </div>
+      <% end %>
+      
+      <div>
+        <h2 class="destination-show-h2">Comments <span class="badge badge-secondary" id="comment_count"><%= @destination.comments.count %></span></h2>
+        <h4 class="destination-show-h4-commentfeed">
+          <%= render 'comments/comment_feed', comments: @comments %>
+        </h4>
+        <div class="destination-show-h4">
+          <%= render 'comments/new_form' %>
+        </div>
+      </div>
+      
     </div>
   </div>  
 </div>

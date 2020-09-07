@@ -25,8 +25,10 @@
       <div class="col-md-8">
         <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
         <span class='from'>From: <%= destination.from %></span>
-        <span class='time'>Time: <%= destination.time %></span>
         <span class='date'>Date: <%= destination.date %></span><br>
+        <% unless destination.time.blank? %>
+        <span class='time'>Time required: <%= destination.time %></span>
+        <% end %>
         <span class='outline'><%= destination.outline %></span>
         <span class='username'>User: <%= link_to destination.user.name, destination.user %></span>
       </div>
