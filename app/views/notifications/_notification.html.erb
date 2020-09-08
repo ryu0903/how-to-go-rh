@@ -1,0 +1,50 @@
+<% user = User.find(notification.from_user_id) %>
+<% unless notification.destination_id.blank? %>
+  <% destination = Destination.find(notification.destination_id) %>
+<% end %>
+<% unless notification.follow_id.blank? %>
+  <% follower = User.find(notification.from_user_id) %>
+<% end %>
+
+<li id="notification-<%= notification.id %>" class="list-unstyled">
+    <% if notification.variety == 1 %>
+      <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
+      <p class="notification-message">Your post was added to favorites by <%= link_to user.name, user_path(user) %></p>
+      <div class="row media-body">
+      <div class="col-md-4">
+        <span>
+          <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
+        </span>
+      </div>
+      <div class="col-md-8">
+        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
+        <span class='from'>From: <%= destination.from %></span>
+        <span class='date'>Date: <%= destination.date %></span><br>
+        <% unless destination.time.blank? %>
+        <span class='time'>Time required: <%= destination.time %></span>
+        <% end %>
+        <span class='outline'><%= destination.outline %></span>
+      </div>
+    <% elsif notification.variety == 2 %>
+      <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
+      <p class="notification-message"><%= link_to user.name, user_path(user) %> added comment to your post 「<%= notification.content %>」</p>
+      <div class="row media-body">
+      <div class="col-md-4">
+        <span>
+          <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
+        </span>
+      </div>
+      <div class="col-md-8">
+        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
+        <span class='from'>From: <%= destination.from %></span>
+        <span class='date'>Date: <%= destination.date %></span><br>
+        <% unless destination.time.blank? %>
+        <span class='time'>Time required: <%= destination.time %></span>
+        <% end %>
+        <span class='outline'><%= destination.outline %></span>
+      </div>
+    <% elsif notification.variety == 3 %>
+      <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
+      <p class="notification-message"><%= link_to follower.name, user_path(follower) %> followed you</p>
+    <% end %>
+</li>

@@ -249,3 +249,15 @@ footer {
 .comment-button {
     margin-top: 10px;
 }
+
+
+.notifications {
+    li {
+        padding: 10px 0;
+        border-bottom: 1px solid #e8e8e8;
+    }
+}
+
+li.new_notification > a > span {
+  color: red;
+}

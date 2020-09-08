@@ -5,6 +5,7 @@ RSpec.describe "Users", type: :system do
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, user: user) }
+  
 
   
   
@@ -199,6 +200,120 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_button "Follow"
       end
     end
+    
+    context "通知生成" do
+      
+      let!(:other_destination) { create(:destination, user: other_user) }
+      
+      before do
+        login_for_system(user)
+      end
+      
+      context "自分以外のユーザーの投稿に対して" do
+        before do 
+          visit destination_path(other_destination)
+        end
+        
+        it "お気に入り登録によって通知を作成" do
+          find('.favorite').click
+          expect(page).to have_css 'li.no_notification'
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css 'li.new_notification'
+          visit notifications_path
+          expect(page).to have_css 'li.no_notification'
+          expect(page).to have_content 'Your post was added to favorites by'
+          expect(page).to have_content other_destination.to
+          expect(page).to have_content other_destination.from
+          expect(page).to have_content other_destination.date
+          expect(page).to have_content other_destination.time
+          expect(page).to have_content other_destination.outline
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        end
+        
+        it "コメント作成によって通知を作成" do
+          fill_in "comment_content", with: "こんばんは"
+          click_button "Comment"
+          expect(page).to have_css 'li.no_notification'
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css 'li.new_notification'
+          visit notifications_path
+          expect(page).to have_css 'li.no_notification'
+          expect(page).to have_content 'added comment to your post 「こんばんは」'
+          expect(page).to have_content other_destination.to
+          expect(page).to have_content other_destination.from
+          expect(page).to have_content other_destination.date
+          expect(page).to have_content other_destination.time
+          expect(page).to have_content other_destination.outline
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        end
+        
+        it "フォローによって通知を作成" do
+          visit user_path(other_user)
+          click_button "Follow"
+          expect(page).to have_css 'li.no_notification'
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css 'li.new_notification'
+          visit notifications_path
+          expect(page).to have_css 'li.no_notification'
+          expect(page).to have_content 'followed you'
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        end
+      end
+      
+      context "自分の投稿に対して" do
+        before do
+          visit destination_path(destination)
+        end
+        
+        it "コメント作成によって通知が作成されないこと" do
+          fill_in "comment_content", with: "こんばんは"
+          click_button "Comment"
+          expect(page).to have_css 'li.no_notification'
+          visit notifications_path
+          expect(page).not_to have_content 'added comment to your post 「こんばんは」'
+          expect(page).not_to have_content other_destination.to
+          expect(page).not_to have_content other_destination.from
+          expect(page).not_to have_content other_destination.date
+          expect(page).not_to have_content other_destination.time
+          expect(page).not_to have_content other_destination.outline
+          expect(page).not_to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+          expect(page).to have_content "No notifications"
+        end
+      end
+      
+      context "通知の削除" do
+        it "通知がある場合、削除ができること", js: true do
+          visit destination_path(other_destination)
+          find('.favorite').click
+          expect(page).to have_css 'li.no_notification'
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css 'li.new_notification'
+          visit notifications_path
+          expect(page).to have_css 'li.no_notification'
+          expect(page).to have_content 'Your post was added to favorites by'
+          expect(page).to have_content other_destination.to
+          expect(page).to have_content other_destination.from
+          expect(page).to have_content other_destination.date
+          expect(page).to have_content other_destination.time
+          expect(page).to have_content other_destination.outline
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+          find('.notification-delete').click
+          page.driver.browser.switch_to.alert.accept
+          expect(page).not_to have_content other_destination.to
+          expect(page).not_to have_content other_destination.from
+          expect(page).not_to have_content other_destination.date
+          expect(page).not_to have_content other_destination.time
+          expect(page).not_to have_content other_destination.outline
+          expect(page).not_to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+          expect(page).to have_content "No notifications"
+        end
+      end
+    end      
+          
   end
   
   describe "プロフィール編集ページ" do

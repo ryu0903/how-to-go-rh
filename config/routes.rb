@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'comments/create'
-  get 'comments/destroy'
-  get 'sessions/new'
   root to: 'toppages#home'
   
   #user
@@ -29,5 +26,8 @@ Rails.application.routes.draw do
   
   #comment
   resources :comments, only: [:create, :destroy]
+  
+  #notification
+  resources :notifications, only: [:index, :destroy]
   
 end
