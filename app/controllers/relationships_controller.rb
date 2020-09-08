@@ -8,6 +8,13 @@ class RelationshipsController < ApplicationController
       format.html  { redirect_to @user }
       format.js 
     end
+    
+    if @user != current_user
+      @user.notifications.create(follow_id: @user.id, 
+                                 variety: 3,
+                                 from_user_id: current_user.id)
+      @user.update_attribute(:notification, true)
+    end
   end
   
   def destroy

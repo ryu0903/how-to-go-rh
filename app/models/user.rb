@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :added_favorites, through: :favorites, source: :destination
   #comment
   has_many :comments, dependent: :destroy
+  #notification
+  has_many :notifications, dependent: :destroy
   
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }

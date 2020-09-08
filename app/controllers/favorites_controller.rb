@@ -3,10 +3,18 @@ class FavoritesController < ApplicationController
   
   def create
     @destination = Destination.find(params[:destination_id])
+    @user = @destination.user
     current_user.favorite(@destination)
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }
       format.js
+    end
+    
+    if @user != current_user
+      @user.notifications.create(destination_id: @destination.id, 
+                                 variety: 1,
+                                 from_user_id: current_user.id)
+      @user.update_attribute(:notification, true)
     end
   end
   

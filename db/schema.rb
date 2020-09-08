@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_165732) do
+ActiveRecord::Schema.define(version: 2020_09_08_042254) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2020_09_07_165732) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "destination_id"
+    t.integer "follow_id"
+    t.integer "variety"
+    t.text "content"
+    t.integer "from_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
@@ -67,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_165732) do
     t.datetime "updated_at", null: false
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.boolean "notification", default: false
   end
 
   add_foreign_key "comments", "destinations"
