@@ -5,68 +5,8 @@
   box-sizing:         border-box;
 }
 
-// 全ページ共通
-body {
- 
-}
-
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
-
-// テキストの見栄え
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-// ヘッダー
-.navbar ul{
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
- #logo {
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  img {
-    width: 150px;
-  }
-}
-
-// フッター
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-  small {
-    float: center;
-  }
+* {
+    font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
 .checkbox {
@@ -135,8 +75,10 @@ footer {
     }
     
     .edit{
-        
-        margin-right: 10px;
+        display: block;
+        margin-left: auto;
+        width: 150px;
+        margin-right: 0;
     }
     
     .username {
@@ -164,12 +106,12 @@ footer {
 
 .destination-show-h2{
     text-align:left;
+    font-size: 35px;
 }
 
 .destination-show-h4{
-    margin-left: 70px;
     margin-bottom: 70px;
-    
+    font-size: 25px;
 }
 
 .destination-show-user{
@@ -192,7 +134,7 @@ footer {
 }
 
 .stats{
-    margin: 5px 5px;
+    margin: 10px 0;
 }
 
 .feed-follow{
@@ -225,7 +167,6 @@ footer {
 }
 
 .destination-show-h4-commentfeed{
-    margin-left: 70px;
     margin-bottom: 30px;
 }
 
@@ -235,14 +176,16 @@ footer {
     
     .comment-user {
         margin-bottom: 10px;
+        font-size: 25px;
     }
     .comment-text {
         margin-bottom: 10px;
+        font-size: 25px;
     }
     .comment-date{
         text-align: right;
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 15px;
     }
 }
 
@@ -260,4 +203,8 @@ footer {
 
 li.new_notification > a > span {
   color: red;
+}
+
+.page-titles {
+    font-size: 35px;
 }

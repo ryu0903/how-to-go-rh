@@ -74,7 +74,7 @@ end
 
 gem 'devise'
 
-gem 'bootstrap'
+
 gem 'jquery-rails'
 
 gem 'faker'
@@ -83,3 +83,9 @@ gem 'kaminari'
 
 gem 'carrierwave',             '1.2.2'  
 gem "mini_magick",             '>= 4.9.4'
+
+gem 'font-awesome-rails'
+
+gem 'ransack'
+
+gem 'bootstrap-honoka-rails' , '~> 4.3.1'

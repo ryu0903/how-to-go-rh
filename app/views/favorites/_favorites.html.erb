@@ -2,23 +2,11 @@
   <li class="media favorite_destination">
     <div class="row media-body">
       <div class="col-md-4">
-        <div>
-          <%= link_to gravatar_for(f.destination.user, size: 50), f.destination.user %>
-        </div>
+        
         <span>
           <%= link_to((image_tag f.destination.picture.thumb200.url), destination_path(f.destination.id), class: "destination-picture") if f.destination.picture.url.present? %>
         </span>
         <div>
-          <span class='edit'>
-            <% if current_user == f.destination.user %>
-              <%= link_to 'Edit', edit_destination_path(f.destination) %>
-            <% end %>
-          </span>
-          <span class='delete'>
-            <% if current_user.admin? || (current_user == f.destination.user) %>
-              <%= link_to 'Delete', destination_path(f.destination), method: :delete, data: { confirm: "Are you OK?" }  %>
-            <% end %>  
-          </span>
           <%= render 'users/favorite_form', destination: f.destination %>
         </div>
       </div>
@@ -29,6 +17,16 @@
         <span class='date'>Date: <%= f.destination.date %></span><br>
         <span class='outline'><%= f.destination.outline %></span>
         <span class='username'>User: <%= link_to f.destination.user.name, f.destination.user %></span>
+        <div>
+          <span class='edit'>
+            <% if current_user == f.destination.user %>
+              <%= link_to 'Edit', edit_destination_path(f.destination) %>
+            <% end %>
+            <% if current_user.admin? || (current_user == f.destination.user) %>
+              <%= link_to 'Delete', destination_path(f.destination), method: :delete, data: { confirm: "Are you OK?" }  %>
+            <% end %>  
+          </span>
+        </div>
       </div>
     </div>
   </li>

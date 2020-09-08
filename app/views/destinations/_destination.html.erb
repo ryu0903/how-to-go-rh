@@ -2,23 +2,11 @@
   <li class="media">
     <div class="row media-body">
       <div class="col-md-4">
-        <div>
-          <%= link_to gravatar_for(destination.user, size: 50), destination.user %>
-        </div>
+       
         <span>
           <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
         </span>
         <div>
-          <span class='edit'>
-            <% if current_user == destination.user %>
-              <%= link_to 'Edit', edit_destination_path(destination) %>
-            <% end %>
-          </span>
-          <span class='delete'>
-            <% if current_user.admin? || (current_user == destination.user) %>
-              <%= link_to 'Delete', destination_path(destination), method: :delete, data: { confirm: "Are you OK?" }  %>
-            <% end %>  
-          </span>
           <%= render 'users/favorite_form', destination: destination %>
         </div>
       </div>
@@ -31,6 +19,17 @@
         <% end %>
         <span class='outline'><%= destination.outline %></span>
         <span class='username'>User: <%= link_to destination.user.name, destination.user %></span>
+        <div>
+          <span class='edit'>
+            <% if current_user == destination.user %>
+              <%= link_to 'Edit', edit_destination_path(destination) %>
+            <% end %>
+            <% if current_user.admin? || (current_user == destination.user) %>
+              <%= link_to 'Delete', destination_path(destination), method: :delete, data: { confirm: "Are you OK?" }  %>
+            <% end %> 
+          </span>
+        </div>
+        
       </div>
     </div>
   </li>
