@@ -15,7 +15,7 @@ class Destination < ApplicationRecord
     
   def picture_size
     if picture.size > 5.megabytes
-      errors.add(:picture, "Picture must be less than 5 megabytes.")
+      errors.add(:picture, "5MBより大きい画像はアップロードできません。")
     end
   end
   

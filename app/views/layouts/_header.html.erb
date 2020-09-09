@@ -13,7 +13,7 @@
             <li class="nav-item no_notification">
           <% end %>
             <%= link_to notifications_path, class: 'nav-link' do %><i class="fas fa-bell"></i> <span>Notice</span><% end %></li>
-          <li class="nav-item"><%= link_to favorites_user_path(current_user), class: 'nav-link' do %><i class="fas fa-heart"></i> Favorites<% end %></li>
+          <li class="nav-item"><%= link_to favorites_user_path(current_user), class: 'nav-link' do %><i class="fas fa-heart"></i> Favorite<% end %></li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user-cog"></i><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
@@ -21,13 +21,13 @@
               <li class="dropdown-item"><%= link_to users_path do %><i class="fas fa-users"></i> Users<% end %></li>
               <li class="dropdown-item"><%= link_to "#" do %><i class="fas fa-file-csv"></i> CSV<% end %></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to logout_path, method: :delete do %><i class="fas fa-sign-out-alt"></i> Log Out<% end %></li>
+              <li class="dropdown-item"><%= link_to logout_path, method: :delete do %><i class="fas fa-sign-out-alt"></i> Logout<% end %></li>
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to "#", class: 'nav-link' do %><i class="fas fa-info-circle"></i> About<% end %></li>
-　　　　  <li class="nav-item"><%= link_to signup_path, class: 'nav-link' do %><i class="fas fa-user-plus"></i> Sign Up<% end %></li>
-　　　　　<li class="nav-item"><%= link_to login_path, class: 'nav-link' do %><i class="fas fa-sign-in-alt"></i> Log In<% end %></li>
+          <li class="nav-item"><%= link_to "#", class: 'nav-link' do %><i class="fas fa-info-circle"></i> What's How to Go?<% end %></li>
+　　　　  <li class="nav-item"><%= link_to signup_path, class: 'nav-link' do %><i class="fas fa-user-plus"></i> Signup<% end %></li>
+　　　　　<li class="nav-item"><%= link_to login_path, class: 'nav-link' do %><i class="fas fa-sign-in-alt"></i> Login<% end %></li>
         <% end %>
       </ul>
     </nav>

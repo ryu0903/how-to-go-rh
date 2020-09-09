@@ -44,7 +44,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Your Destination Posted!"
+        expect(page).to have_content "投稿しました！"
       
       end
     
@@ -58,7 +58,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
         fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Post failed"
+        expect(page).to have_content "投稿に失敗しました。"
       end
       
         
@@ -72,7 +72,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
         fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Your Destination Posted!"
+        expect(page).to have_content "投稿しました！"
         expect(destination.picture.url).to include "test.jpg"
       end
     end
@@ -96,7 +96,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Outline", with: "very far", match: :first
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Your Destination Posted!"
+        expect(page).to have_content "投稿しました！"
       end
     
       it "無効なデータ登録、フラッシュメッセージ確認" do
@@ -106,7 +106,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Outline", with: "very far", match: :first
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test.jpg", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Post failed"
+        expect(page).to have_content "投稿に失敗しました。"
       end
       
         
@@ -116,7 +116,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Date", with: "2020/8/1", match: :first
         fill_in "Outline", with: "very far", match: :first
         click_button "Post", match: :first
-        expect(page).to have_content "Your Destination Posted!"
+        expect(page).to have_content "投稿しました！"
         expect(destination.picture.url).to include "test.jpg"
       end
     end
@@ -153,7 +153,7 @@ RSpec.describe "Destinations", type: :system do
         visit destination_path(destination)
         click_link 'Delete'
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'Your Post Deleted'
+        expect(page).to have_content '投稿を削除しました。'
       end
     end
     
@@ -223,7 +223,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Notice/Advice", with: "Get off Shinagawa", match: :first
         fill_in "Reference", with: "https://jr-central.co.jp/", match: :first
         click_button "Update", match: :first
-        expect(page).to have_content "Your Post Updated!"
+        expect(page).to have_content "投稿を更新しました！"
         expect(destination.reload.to).to eq "Tokyo"
         expect(destination.reload.from).to eq "Hiroshima"
         expect(destination.reload.time).to eq "4 hours"
@@ -238,12 +238,12 @@ RSpec.describe "Destinations", type: :system do
       it "無効な更新" do
         fill_in "Destination", with: "", match: :first
         click_button "Update", match: :first
-        expect(page).to have_content "Update failed"
+        expect(page).to have_content "更新に失敗しました。"
         expect(destination.reload.to).not_to eq ""
       end
     end
     
-     context "Schedule登録" do
+     context "Schedule編集" do
       before do
         click_on "Schedule"
       end
@@ -265,7 +265,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "Notice/Advice", with: "", match: :first
         fill_in "Reference", with: "", match: :first
         click_button "Update", match: :first
-        expect(page).to have_content "Your Post Updated!"
+        expect(page).to have_content "投稿を更新しました！"
         expect(destination.reload.to).to eq "Tokyo"
         expect(destination.reload.from).to eq "Hiroshima"
         expect(destination.reload.time).not_to eq "4 hours"
@@ -280,7 +280,7 @@ RSpec.describe "Destinations", type: :system do
       it "無効な更新、フラッシュメッセージ確認" do
         fill_in "Destination", with: "", match: :first
         click_button "Update", match: :first
-        expect(page).to have_content "Update failed"
+        expect(page).to have_content "更新に失敗しました。"
       end
     end
     
@@ -288,7 +288,7 @@ RSpec.describe "Destinations", type: :system do
       it "削除後、削除成功のメッセージ確認" do
         click_link "Delete"
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'Your Post Deleted'
+        expect(page).to have_content '投稿を削除しました。'
       end
     end
   end

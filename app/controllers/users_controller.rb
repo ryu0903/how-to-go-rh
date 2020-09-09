@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
       if @user.save
         log_in(@user)
-        flash[:success] = 'Welcome to How to Go!'
+        flash[:success] = 'How to Goへようこそ！!'
         redirect_to @user
       else 
         render 'new'
@@ -34,10 +34,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update(user_params_for_update)
-      flash[:success] = "Profile Updated"
+      flash[:success] = "プロフィールが更新されました！"
       redirect_to @user
     else
-      flash.now[:danger] = "Profile update failed"
+      flash.now[:danger] = "プロフィールの更新に失敗しました。"
       render 'edit'
     end
   end
@@ -47,14 +47,14 @@ class UsersController < ApplicationController
     
     if current_user.admin?
       @user.destroy
-      flash[:success] = "Deleted Account"
+      flash[:success] = "アカウントを削除しました。"
       redirect_to users_url
     elsif current_user?(@user)
       @user.destroy
-      flash[:success] = "Deleted your account"
+      flash[:success] = "アカウントを削除しました。"
       redirect_to root_url
     else
-      flash[:danger] = "You can't delete accounts of the others."
+      flash[:danger] = "他のユーザーを削除することはできません。"
       redirect_to root_url
     end
     

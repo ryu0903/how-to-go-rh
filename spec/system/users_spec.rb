@@ -49,12 +49,12 @@ RSpec.describe "Users", type: :system do
     end
     
     context "ページレイアウト" do
-      it "Sing Upの文字列の確認" do
-        expect(page).to have_content 'Sign Up'
+      it "Singupの文字列の確認" do
+        expect(page).to have_content 'Signup'
       end
       
       it "正しいタイトルの確認" do
-        expect(page).to have_title full_title('Sign Up')
+        expect(page).to have_title full_title('Signup')
       end
     end
     
@@ -64,8 +64,8 @@ RSpec.describe "Users", type: :system do
         fill_in "Email", with: "user@example.com"
         fill_in "Password(more than 6 letters)", with: "password"
         fill_in "Password Confirmation", with: "password"
-        click_button "Sign Up"
-        expect(page).to have_content "Welcome to How to Go!"
+        click_button "Signup"
+        expect(page).to have_content "How to Goへようこそ！"
       end
       
       it "無効なユーザーでユーザー登録を行うと登録失敗のフラッシュが表示されること" do
@@ -73,7 +73,7 @@ RSpec.describe "Users", type: :system do
         fill_in "Email", with: "user@example.com"
         fill_in "Password(more than 6 letters)", with: "password"
         fill_in "Password Confirmation", with: "pass"
-        click_button "Sign Up"
+        click_button "Signup"
         expect(page).to have_content "Nameを入力してください"
         expect(page).to have_content "Password confirmationとPasswordの入力が一致しません"
       end
@@ -222,7 +222,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_css 'li.new_notification'
           visit notifications_path
           expect(page).to have_css 'li.no_notification'
-          expect(page).to have_content 'Your post was added to favorites by'
+          expect(page).to have_content 'さんがお気に入りに登録しました。'
           expect(page).to have_content other_destination.to
           expect(page).to have_content other_destination.from
           expect(page).to have_content other_destination.date
@@ -240,7 +240,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_css 'li.new_notification'
           visit notifications_path
           expect(page).to have_css 'li.no_notification'
-          expect(page).to have_content 'added comment to your post 「こんばんは」'
+          expect(page).to have_content 'さんがコメントしました。「こんばんは」'
           expect(page).to have_content other_destination.to
           expect(page).to have_content other_destination.from
           expect(page).to have_content other_destination.date
@@ -258,7 +258,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_css 'li.new_notification'
           visit notifications_path
           expect(page).to have_css 'li.no_notification'
-          expect(page).to have_content 'followed you'
+          expect(page).to have_content 'さんにフォローされました。'
           expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
         end
       end
@@ -273,14 +273,14 @@ RSpec.describe "Users", type: :system do
           click_button "Comment"
           expect(page).to have_css 'li.no_notification'
           visit notifications_path
-          expect(page).not_to have_content 'added comment to your post 「こんばんは」'
+          expect(page).not_to have_content 'さんがコメントしました。「こんばんは」'
           expect(page).not_to have_content other_destination.to
           expect(page).not_to have_content other_destination.from
           expect(page).not_to have_content other_destination.date
           expect(page).not_to have_content other_destination.time
           expect(page).not_to have_content other_destination.outline
           expect(page).not_to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
-          expect(page).to have_content "No notifications"
+          expect(page).to have_content "通知はありません"
         end
       end
       
@@ -294,7 +294,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_css 'li.new_notification'
           visit notifications_path
           expect(page).to have_css 'li.no_notification'
-          expect(page).to have_content 'Your post was added to favorites by'
+          expect(page).to have_content 'さんがお気に入りに登録しました。'
           expect(page).to have_content other_destination.to
           expect(page).to have_content other_destination.from
           expect(page).to have_content other_destination.date
@@ -309,7 +309,7 @@ RSpec.describe "Users", type: :system do
           expect(page).not_to have_content other_destination.time
           expect(page).not_to have_content other_destination.outline
           expect(page).not_to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
-          expect(page).to have_content "No notifications"
+          expect(page).to have_content "通知はありません"
         end
       end
     end      
@@ -335,7 +335,7 @@ RSpec.describe "Users", type: :system do
       fill_in "Introduction", with: "こんばんは"
       click_button "Update"
       
-      expect(page).to have_content "Profile Updated"
+      expect(page).to have_content "プロフィールが更新されました！"
       expect(user.reload.name).to eq "Example User for edit"
       expect(user.reload.email).to eq "edit-user@example.com"
       expect(user.reload.introduce).to eq "こんばんは"
@@ -346,7 +346,7 @@ RSpec.describe "Users", type: :system do
       fill_in "Email", with: ""
       click_button "Update"
       
-      expect(page).to have_content "Profile update failed"
+      expect(page).to have_content "プロフィールの更新に失敗しました。"
       expect(page).to have_content 'Nameを入力してください'
       expect(page).to have_content 'Emailを入力してください'
       expect(page).to have_content 'Emailは不正な値です'
@@ -357,7 +357,7 @@ RSpec.describe "Users", type: :system do
       it "正しく削除できること" do
         click_link "Delete Account"
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content "Deleted your account"
+        expect(page).to have_content "アカウントを削除しました。"
       end
     end
   end
