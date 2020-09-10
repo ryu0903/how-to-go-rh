@@ -85,13 +85,13 @@
       <% unless @destination.reference.blank? %>
       <div>
         <div class="destination-show-h2">Reference</div>
-        <div class="destination-show-h4"><%= @destination.reference %></div>
+        <div class="destination-show-h4"><%= text_url_to_link(@destination.reference).html_safe %></div>
       </div>
       <% end %>
     </div>
   </div>
   
-   <% if @schedules.any? %>
+  <% if @schedules.any? %>
     <%= render 'show_schedule', schedules: @schedules %>
   <% end %>
      

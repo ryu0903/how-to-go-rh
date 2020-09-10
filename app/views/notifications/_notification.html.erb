@@ -17,9 +17,9 @@
         </span>
       </div>
       <div class="col-md-8">
-        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
+        <span class='to'><%= link_to destination.to, destination_path(destination) %></span>
         <span class='from'>From: <%= destination.from %></span>
-        <span class='date'>Date: <%= destination.date %></span><br>
+        <span class='date'>Date: <%= destination.date %></span>
         <% unless destination.time.blank? %>
         <span class='time'>Time required: <%= destination.time %></span>
         <% end %>
