@@ -13,7 +13,7 @@ def login_for_system(user)
   visit login_path
   fill_in "Email", with: user.email
   fill_in "Password", with: user.password
-  click_button "Log In"
+  click_button "Login"
 end
 
 def login_remember(user)

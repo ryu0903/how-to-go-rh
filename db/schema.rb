@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_042254) do
+ActiveRecord::Schema.define(version: 2020_09_09_174508) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -69,6 +69,20 @@ ActiveRecord::Schema.define(version: 2020_09_08_042254) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "to"
+    t.string "from"
+    t.string "date"
+    t.string "time"
+    t.text "detail"
+    t.text "notice"
+    t.string "picture"
+    t.bigint "destination_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_schedules_on_destination_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -88,4 +102,5 @@ ActiveRecord::Schema.define(version: 2020_09_08_042254) do
   add_foreign_key "favorites", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "schedules", "destinations"
 end

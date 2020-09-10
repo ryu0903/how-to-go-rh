@@ -1,23 +1,11 @@
 <% provide(:title, "Edit: #{@destination.to}") %>
 <div class="container">
   <h3 class="text-center mb-5">Edit</h3>
-     <main class="p-3 col-md-8 offset-md-2">
-      <ul class="nav nav-tabs nav-justified">
-        <li class="nav-item">
-          <a href="#destination" class="nav-link active" data-toggle="tab">Destination</a>
-        </li>
-        <li class="nav-item">
-          <a href="#schedule" class="nav-link" data-toggle="tab">Schedule</a>
-        </li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="destination" class="tab-pane active">
-          <%= render 'destinations/edit_form' %>
-        </div>
-        <div id="schedule" class="tab-pane">
-          <%= render 'destinations/edit_schedule_form' %>
-        </div>
-      </div>
-    </main>
- </div> 
+  <div class="col-md-8 offset-md-2">
+    <% unless @destination.schedules.any? %>
+      <%= render 'destinations/edit_form' %>
+    <% else %>
+      <%= render 'destinations/edit_schedule_form' %>
+    <% end %>
+  </div>
+</div> 

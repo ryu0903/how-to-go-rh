@@ -9,7 +9,7 @@
 <li id="notification-<%= notification.id %>" class="list-unstyled">
     <% if notification.variety == 1 %>
       <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-      <p class="notification-message">Your post was added to favorites by <%= link_to user.name, user_path(user) %></p>
+      <p class="notification-message"> <%= link_to user.name, user_path(user) %>さんがお気に入りに登録しました。</p>
       <div class="row media-body">
       <div class="col-md-4">
         <span>
@@ -27,7 +27,7 @@
       </div>
     <% elsif notification.variety == 2 %>
       <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-      <p class="notification-message"><%= link_to user.name, user_path(user) %> added comment to your post 「<%= notification.content %>」</p>
+      <p class="notification-message"><%= link_to user.name, user_path(user) %>さんがコメントしました。「<%= notification.content %>」</p>
       <div class="row media-body">
       <div class="col-md-4">
         <span>
@@ -45,6 +45,6 @@
       </div>
     <% elsif notification.variety == 3 %>
       <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-      <p class="notification-message"><%= link_to follower.name, user_path(follower) %> followed you</p>
+      <p class="notification-message"><%= link_to follower.name, user_path(follower) %>さんにフォローされました。</p>
     <% end %>
 </li>

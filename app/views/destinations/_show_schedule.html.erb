@@ -1,0 +1,46 @@
+<% schedules.each do |schedule| %>
+<div class="schedule-detail">
+  <div class="row">
+    <div class="col-md-4">
+      <div>
+        <div class="schedule-show-date"><%= schedule.date %></div>
+      </div>
+      
+      <span class="picture">
+        <%= link_to((image_tag schedule.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if schedule.picture.url.present? %>
+      </span>
+    </div>
+    
+    <div class="col-md-8 show-destination-detail">
+      <div>
+        <div class="destination-show-h2">Destination</div>
+        <div class="destination-show-h4"><%= schedule.to %></div>
+      </div>
+    
+      <div>
+        <div class="destination-show-h2">From</div>
+        <div class="destination-show-h4"><%= schedule.from %></div>
+      </div>
+      
+      <div>
+        <div class="destination-show-h2">Time required</div>
+        <div class="destination-show-h4"><%= schedule.time %></div>
+      </div>
+      
+      <% unless schedule.detail.blank? %>
+      <div>
+        <div class="destination-show-h2">Detail</div>
+        <div class="destination-show-h4"><%= schedule.detail %></div>
+      </div>
+      <% end %>
+     
+      <% unless schedule.notice.blank? %>
+      <div>
+        <div class="destination-show-h2">Notice/Advice</div>
+        <div class="destination-show-h4"><%= schedule.notice %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>

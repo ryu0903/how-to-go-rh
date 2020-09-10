@@ -1,3 +1,4 @@
+<div class='new-schedule-title'>Schedule outline</div>
 <%= form_with model: @destination, local: true do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
   <script type="text/javascript">
@@ -17,26 +18,40 @@
   
   <div class="form-group">
     <%= f.label :to, 'Destination' %>　<span class="required">※Required</span>
-    <%= f.text_field :to, class: "form-control" %>
+    <%= f.text_field :to, class: "form-control", id: 's-e-to' %>
   </div>
   
   <div class="form-group">
     <%= f.label :from %>　<span class="required">※Required</span>
-    <%= f.text_field :from, class: "form-control" %>
+    <%= f.text_field :from, class: "form-control", id: 's-e-from' %>
   </div>
 
   <div class="form-group">
     <%= f.label :date, 'Dates' %>　<span class="required">※Required</span>
-    <%= f.text_field :date, class: "form-control" %> 
+    <%= f.text_field :date, class: "form-control", id: 's-e-date' %> 
   </div>
   
   <div class="form-group">
     <%= f.label :outline %>　<span class="optional">※Optional</span>
-    <%= f.text_field :outline, class: "form-control" %>
+    <%= f.text_field :outline, class: "form-control", id: 's-e-outline' %>
   </div>
   
+  <div>
+    <%= f.fields_for :schedules do |schedule| %>
+      <%= render 'schedule_fields', f: schedule %>
+    <% end %>
+  </div>
   
-  <%= f.submit 'Update', class: 'btn btn-primary btn-block' %>
+  <div class="links">
+      <%= link_to_add_association 'Add Schedule', f, :schedules, class: 'add_schedule' %> 
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :reference %>　<span class="optional">※Optional</span>
+    <%= f.text_area :reference, class: "form-control", id: 's-e-reference' %>
+  </div>
+  
+  <%= f.submit 'Update', class: 'btn btn-primary btn-block', id: 's-e-button' %>
   
 <% end %>
 <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" }  %>

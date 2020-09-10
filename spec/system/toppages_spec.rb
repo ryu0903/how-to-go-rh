@@ -40,7 +40,7 @@ RSpec.describe "Toppages", type: :system do
         visit root_path
         click_link "Delete"
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'Your Post Deleted'
+        expect(page).to have_content '投稿を削除しました。'
       end
     end
     

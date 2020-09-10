@@ -2,6 +2,9 @@ class Destination < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :schedules, dependent: :destroy
+  accepts_nested_attributes_for :schedules, reject_if: :all_blank, allow_destroy: true
+  
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   
@@ -15,7 +18,7 @@ class Destination < ApplicationRecord
     
   def picture_size
     if picture.size > 5.megabytes
-      errors.add(:picture, "Picture must be less than 5 megabytes.")
+      errors.add(:picture, "5MBより大きい画像はアップロードできません。")
     end
   end
   

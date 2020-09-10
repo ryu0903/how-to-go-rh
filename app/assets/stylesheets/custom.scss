@@ -5,69 +5,16 @@
   box-sizing:         border-box;
 }
 
-// 全ページ共通
-body {
- 
+// common
+* {
+    font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
-section {
-  overflow: auto;
+.pagination {
+  justify-content: center;
 }
 
-textarea {
-  resize: vertical;
-}
-
-
-// テキストの見栄え
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-// ヘッダー
-.navbar ul{
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
- #logo {
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  img {
-    width: 150px;
-  }
-}
-
-// フッター
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-  small {
-    float: center;
-  }
-}
+// sessions_new
 
 .checkbox {
  margin-top: -10px;
@@ -82,6 +29,7 @@ footer {
  margin-left: 0;
 }
 
+// users_index
 .users {
  list-style: none;
  margin: 0;
@@ -93,8 +41,9 @@ footer {
  }
 }
 
-.pagination {
-  justify-content: center;
+// destinations_feed
+.feed-detail {
+    margin-top: 55px;
 }
 
 .feed{
@@ -107,51 +56,51 @@ footer {
     }
     
     .to {
-        
+        margin-left: 40px;
     }
     
     .from{
-        margin-left: 10px;
-        margin-top: 10px;
-    }
-    
-    .time{
-        margin-left: 10px;
-        margin-top: 10px;
+        display: block;
+        margin-left: 40px;
+        margin-top: 15px;
     }
     
     .date{
-        margin-left: 10px;
-        margin-top: 10px;
+        display: block;
+        margin-left: 40px;
+        margin-top: 15px;
+    }
+    
+    .time{
+        display: block;
+        margin-left: 40px;
+        margin-top: 15px;
     }
     
     .outline {
         display: block;
-        margin-left: 10px;
-        img {
-          display: block;
-          padding: 5px 0;
-        }
+        margin-left: 40px;
+        margin-top: 15px;
     }
     
-    .edit{
-        
-        margin-right: 10px;
-    }
     
-    .username {
-        display: block;
-        margin-left: auto;
-        margin-right: 0;
-        width: 150px;
-    }
-    
-    .gravatar {
-    
-    margin-right: 10px;
-    margin-top: 5px;
-    }
 }
+
+.post-type-destination {
+    font-size: 25px;
+    color: orange;
+}
+
+.post-type-schedule {
+    font-size: 25px;
+    color: green;
+}
+
+.show-destination-detail{
+    margin-top: 75px;
+}
+
+// destinations_new
 
 .required {
   color: red;
@@ -162,18 +111,35 @@ footer {
   font-size: 13px;
 }
 
+// destination_schedule_new
+.new-schedule-title {
+    font-size: 25px;
+    text-align: center;
+}
+
+.remove_schedule {
+    color: red;
+}
+
+// destinations_show
+
 .destination-show-h2{
     text-align:left;
+    font-size: 30px;
+    margin-left: 40px;
 }
 
 .destination-show-h4{
-    margin-left: 70px;
     margin-bottom: 70px;
-    
+    font-size: 25px;
+    margin-left: 40px;
 }
 
 .destination-show-user{
-    margin-left: 500px;
+    margin-left: auto;
+    margin-right: 0;
+    display: inline-block;
+    font-size: 20px;
 }
 
 .edit-destination{
@@ -191,10 +157,47 @@ footer {
   box-sizing: border-box;
 }
 
-.stats{
-    margin: 5px 5px;
+.show-post-type-schedule {
+    font-size: 35px;
+    color: green;
 }
 
+.show-post-type-destination {
+    font-size: 35px;
+    color: orange;
+}
+
+.show-favorite-button {
+    font-size: 20px;
+}
+
+// destination_show_schedule
+.schedule-show-date {
+    font-size: 35px;
+}
+
+.schedule-detail {
+    border-top: 2px solid #e8e8e8;
+}
+
+// users_show
+.stats{
+    margin: 10px 0;
+}
+
+.page-titles {
+    font-size: 35px;
+}
+
+.user_profile {
+    margin-top: 40px;
+}
+
+.user_show_feed {
+    margin-top: 30px;
+}
+
+// following/followers
 .feed-follow{
    overflow: auto;
    padding: 10px 0;
@@ -211,6 +214,7 @@ footer {
     bottom: 50px;
 }
 
+// favorite/unfavorite
 .favorite {
     color: blue;
 }
@@ -219,14 +223,15 @@ footer {
     color: red;
 }
 
+// comment
 .more {
     color: gray;
     cursor: pointer;
 }
 
-.destination-show-h4-commentfeed{
-    margin-left: 70px;
+.commentfeed{
     margin-bottom: 30px;
+    margin-left: 40px;
 }
 
 .comment-feed {
@@ -235,14 +240,16 @@ footer {
     
     .comment-user {
         margin-bottom: 10px;
+        font-size: 25px;
     }
     .comment-text {
         margin-bottom: 10px;
+        font-size: 25px;
     }
     .comment-date{
         text-align: right;
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 15px;
     }
 }
 
@@ -250,7 +257,7 @@ footer {
     margin-top: 10px;
 }
 
-
+// notification
 .notifications {
     li {
         padding: 10px 0;
@@ -261,3 +268,15 @@ footer {
 li.new_notification > a > span {
   color: red;
 }
+
+
+
+
+
+
+
+
+
+
+
+

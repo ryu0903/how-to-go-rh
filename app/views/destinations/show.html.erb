@@ -1,86 +1,112 @@
-<% provide(:title, "Destination: #{@destination.to}") %>
+<% if @schedules.any? %>
+  <% provide(:title, "Schedule: #{@destination.to}") %>
+<% else %>
+  <% provide(:title, "Destination: #{@destination.to}") %>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
+      <div>
+        <% if @destination.schedules.any? %>
+          <span class='show-post-type-schedule'><i class="fas fa-calendar-alt"></i> Schedule outline</span>
+        <% else %>
+          <span class='show-post-type-destination'><i class="fas fa-map-marked-alt"></i> Destination</span>
+        <% end %>
+      </div>
+      <div>
+        <div class="destination-show-user">Posted by <%= link_to @destination.user.name, @destination.user %></div>
+      </div>
+      
       <span class="picture">
         <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
       </span>
-      <div class="change-dish">
-        <% if current_user == @destination.user %>
-          <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
-        <% end %>
-        <% if current_user.admin? || (current_user == @destination.user) %>
-          <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
-        <% end %>  
+      <div class="show-favorite-button">
         <%= render 'users/favorite_form', destination: @destination %>
+      </div>
+      <div>
+        <span class="destination-show-user">
+          <% if current_user == @destination.user %>
+            <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
+          <% end %>
+          <% if current_user.admin? || (current_user == @destination.user) %>
+            <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
+          <% end %>  
+        </span>
       </div>
     </div>
     
-    <div class="col-md-8">
+    <div class="col-md-8 show-destination-detail">
+     
+    
       <div>
-        <h5 class="destination-show-user">Posted by <%= link_to @destination.user.name, @destination.user %></h5>
+        <div class="destination-show-h2">Destination</div>
+        <div class="destination-show-h4"><%= @destination.to %></div>
       </div>
     
       <div>
-        <h2 class="destination-show-h2">Destination</h2>
-        <h4 class="destination-show-h4"><%= @destination.to %></h4>
-      </div>
-    
-      <div>
-        <h2 class="destination-show-h2">From</h2>
-        <h4 class="destination-show-h4"><%= @destination.from %></h4>
+        <div class="destination-show-h2">From</div>
+        <div class="destination-show-h4"><%= @destination.from %></div>
       </div>
       
       <div>
-        <h2 class="destination-show-h2">Date</h2>
-        <h4 class="destination-show-h4"><%= @destination.date %></h4>
+        <div class="destination-show-h2">Date</div>
+        <div class="destination-show-h4"><%= @destination.date %></div>
       </div>
       
       <% unless @destination.time.blank? %>
       <div>
-        <h2 class="destination-show-h2">Time required</h2>
-        <h4 class="destination-show-h4"><%= @destination.time %></h4>
+        <div class="destination-show-h2">Time required</div>
+        <div class="destination-show-h4"><%= @destination.time %></div>
       </div>
       <% end %>
       
       <% unless @destination.outline.blank? %>
       <div>
-        <h2 class="destination-show-h2">Outline</h2>
-        <h4 class="destination-show-h4"><%= @destination.outline %></h4>
+        <div class="destination-show-h2">Outline</div>
+        <div class="destination-show-h4"><%= @destination.outline %></div>
       </div>
       <% end %>
       
       <% unless @destination.detail.blank? %>
       <div>
-        <h2 class="destination-show-h2">Detail</h2>
-        <h4 class="destination-show-h4"><%= @destination.detail %></h4>
+        <div class="destination-show-h2">Detail</div>
+        <div class="destination-show-h4"><%= @destination.detail %></div>
       </div>
       <% end %>
      
       <% unless @destination.notice.blank? %>
       <div>
-        <h2 class="destination-show-h2">Notice/Advice</h2>
-        <h4 class="destination-show-h4"><%= @destination.notice %></h4>
+        <div class="destination-show-h2">Notice/Advice</div>
+        <div class="destination-show-h4"><%= @destination.notice %></div>
       </div>
       <% end %>
       
       <% unless @destination.reference.blank? %>
       <div>
-        <h2 class="destination-show-h2">Reference</h2>
-        <h4 class="destination-show-h4"><%= @destination.reference %></h4>
+        <div class="destination-show-h2">Reference</div>
+        <div class="destination-show-h4"><%= @destination.reference %></div>
       </div>
       <% end %>
-      
+    </div>
+  </div>
+  
+   <% if @schedules.any? %>
+    <%= render 'show_schedule', schedules: @schedules %>
+  <% end %>
+     
+  <div class='row'>
+    <div class='offset-md-4 col-md-8'>   
       <div>
-        <h2 class="destination-show-h2">Comments <span class="badge badge-secondary" id="comment_count"><%= @destination.comments.count %></span></h2>
-        <h4 class="destination-show-h4-commentfeed">
+        <div class="destination-show-h2">Comments <span class="badge badge-secondary" id="comment_count"><%= @destination.comments.count %></span></div>
+        <div class="commentfeed">
           <%= render 'comments/comment_feed', comments: @comments %>
-        </h4>
+        </div>
         <div class="destination-show-h4">
           <%= render 'comments/new_form' %>
         </div>
       </div>
-      
     </div>
-  </div>  
+  </div>
+      
 </div>
