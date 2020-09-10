@@ -12,49 +12,48 @@
   <span class="picture">
     <%= f.label :picture %>　<span class="optional">※Optional</span>
     <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'destination_picture' %>
-    <%= image_tag(@destination.picture.thumb400.url) if @destination.picture.url.present? %>
   </span>
   
   <div class="form-group">
     <%= f.label :to, 'Destination' %>　<span class="required">※Required</span>
-    <%= f.text_field :to, class: "form-control" %>
+    <%= f.text_field :to, class: "form-control", id: 'd-to' %>
   </div>
   
   <div class="form-group">
     <%= f.label :from %>　<span class="required">※Required</span>
-    <%= f.text_field :from, class: "form-control" %>
+    <%= f.text_field :from, class: "form-control", id: 'd-from' %>
   </div>
 
   <div class="form-group">
     <%= f.label :date %>　<span class="required">※Required</span>
-    <%= f.date_field :date, class: "form-control" %>
+    <%= f.date_field :date, class: "form-control", id: 'd-date' %>
   </div>
   
   <div class="form-group">
     <%= f.label :time, 'Time required' %>　<span class="required">※Required</span>
-     <%= f.text_field :time, class: "form-control" %>
+     <%= f.text_field :time, class: "form-control", id: 'd-time' %>
   </div>
   
   <div class="form-group">
     <%= f.label :outline %>　<span class="optional">※Optional</span>
-    <%= f.text_field :outline, class: "form-control" %>
+    <%= f.text_field :outline, class: "form-control", id: 'd-outline' %>
   </div>
   
   <div class="form-group">
     <%= f.label :detail %>　<span class="required">※Required</span>
-    <%= f.text_area :detail, class: "form-control" %>
+    <%= f.text_area :detail, class: "form-control", id: 'd-detail' %>
   </div>
   
   <div class="form-group">
     <%= f.label :notice, 'Notice/Advice' %> <span class="optional">※Optional</span>
-    <%= f.text_area :notice, class: "form-control" %>
+    <%= f.text_area :notice, class: "form-control", id: 'd-notice' %>
   </div>
   
   <div class="form-group">
     <%= f.label :reference %>　<span class="optional">※Optional</span>
-    <%= f.text_area :reference, class: "form-control" %>
+    <%= f.text_area :reference, class: "form-control", id: 'd-reference' %>
   </div>
   
-  <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+  <%= f.submit 'Post', class: 'btn btn-primary btn-block', id: 'd-button' %>
   
 <% end %>

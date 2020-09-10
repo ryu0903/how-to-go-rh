@@ -116,7 +116,7 @@ RSpec.describe "Users", type: :system do
       
       it "Destinationの情報確認" do
         Destination.take(5).each do |destination|
-          expect(page).to have_link destination.to
+          expect(page).to have_content destination.to
           expect(page).to have_content destination.from
           expect(page).to have_content destination.time
           expect(page).to have_content destination.date
@@ -179,7 +179,7 @@ RSpec.describe "Users", type: :system do
         user.favorite(destination2)
         visit favorites_user_path(user)
         expect(page).to have_css ".favorite_destination", count: 1
-        expect(page).to have_link destination2.to
+        expect(page).to have_content destination2.to
         expect(page).to have_content destination2.from
         expect(page).to have_content destination2.time
         expect(page).to have_content destination2.date

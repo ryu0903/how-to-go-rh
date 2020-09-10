@@ -27,4 +27,15 @@ FactoryBot.define do
     trait :picture do
       picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')) }
     end 
+    
+    trait :schedules do
+      schedules_attributes {
+        [
+          { to: "Hokkaido", from: "Fukuoka", 
+            date: "2019-01-01", time: "2 hours",
+            detail: "detail", notice: "notice",
+          }
+          ]
+      }
+    end
 end

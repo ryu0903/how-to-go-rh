@@ -89,3 +89,5 @@ gem 'font-awesome-rails'
 gem 'ransack'
 
 gem 'bootstrap-honoka-rails' , '~> 4.3.1'
+
+gem 'cocoon'

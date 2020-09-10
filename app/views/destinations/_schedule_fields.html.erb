@@ -1,0 +1,41 @@
+<div class="nested-fields">
+  <div class='new-schedule-title'>Schedule detail</div>
+  <span class="picture">
+    <%= f.label :picture %>　<span class="optional">※Optional</span>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control s-f-picture', id: 'schedule_picture' %>
+  </span>
+  
+  <div class="form-group">
+    <%= f.label :to, 'Destination' %>　<span class="required">※Required</span>
+    <%= f.text_field :to, class: "form-control s-f-to", id: 's-f-to' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :from %>　<span class="required">※Required</span>
+    <%= f.text_field :from, class: "form-control s-f-from", id: 's-f-from' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date %>　<span class="required">※Required</span>
+    <%= f.date_field :date, class: "form-contro s-f-date", id: 's-f-date' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :time, 'Time required' %>　<span class="required">※Required</span>
+     <%= f.text_field :time, class: "form-control s-f-time", id: 's-f-time' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :detail %>　<span class="required">※Required</span>
+    <%= f.text_area :detail, class: "form-control s-f-detail", id: 's-f-detail' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :notice, 'Notice/Advice' %> <span class="optional">※Optional</span>
+    <%= f.text_area :notice, class: "form-control s-f-notice", id: 's-f-notice' %>
+  </div>
+  
+   <%= link_to_remove_association "Remove Schedule", f, class: 'remove_schedule' %>
+  
+</div>
+  

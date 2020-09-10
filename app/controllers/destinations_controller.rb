@@ -4,12 +4,14 @@ class DestinationsController < ApplicationController
   
   def new
     @destination = Destination.new
+    @destination.schedules.build
   end
   
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
     @comments = @destination.comments
+    @schedules = @destination.schedules
   end
   
   def create
@@ -26,6 +28,7 @@ class DestinationsController < ApplicationController
   
   def edit
     @destination = Destination.find(params[:id])
+    @schedules = @destination.schedules
   end
   
   def update
@@ -54,7 +57,8 @@ class DestinationsController < ApplicationController
   private
   
     def destination_params
-      params.require(:destination).permit(:to, :from, :time, :date, :outline, :detail, :notice, :reference, :picture)
+      params.require(:destination).permit(:to, :from, :time, :date, :outline, :detail, :notice, :reference, :picture,
+                                            schedules_attributes:[:id, :_destroy, :to, :from, :date, :time, :detail, :notice, :picture])
     end
     
     def correct_user

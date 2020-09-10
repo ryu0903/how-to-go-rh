@@ -1,35 +1,47 @@
 <% provide(:title, @title) %>
-<div class="container">
-  <h3 class="title-profile">Follow/Follower</h3>
+  <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <%= gravatar_for @user, size: 120 %>
-      </div>
+      <div class="col-md-8 offset-md-2">
+        <div class="row">
+          <div class"col-md-4">
+            <h3 class="title-profile">Follower</h3>
+            <div>
+              <%= gravatar_for @user, size: 120 %>
+            </div>
+          </div>  
       
-      <div class="col-md-8">
-        <h4 class="show-user-name"><%= link_to @user.name, user_path(@user) %></h4>
-      
-        <div>
-          <%= @user.introduce %>
+          <div class="offset-md-3 col-md-5 user_profile">
+            <h4 class="show-user-name"><%= link_to @user.name, user_path(@user) %></h4>
+                
+            <div>
+              <%= @user.introduce %>
+            </div>
+                
+            <% if current_user == @user %>
+              <div class="profile-edit"><%= link_to 'Edit Profile', edit_user_path(@user) %></div>
+            <% else %>
+              <%= render 'users/follow_form', user: @user %>
+            <% end %>
+          </div>
         </div>
-        
-      </div>
 
-    <main class="p3 col-md-8 offset-md-2">
-      <div class="text-center page-titles">Followers</div>
-      <ul class="nav nav-tabs nav-justified">
-        <li class="nav-item">
-          <a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">
-            Follow 
-          </a>
-        </li> 
-        <li class="nav-item">
-          <a href="<%= followers_user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(followers_user_path(@user)) %>">
-            Follower 
-          </a>
-        </li>
-      </ul>
-      <%= render 'follow_feed', users: @followers %>
-    </main>
+        <div class="user_show_feed">
+          <div class="text-center page-titles">Follower</div>
+          <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item">
+              <a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">
+                Follow 
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="<%= followers_user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(followers_user_path(@user)) %>">
+                Follower 
+              </a>
+            </li>
+          </ul>
+          <%= render 'follow_feed', users: @followers %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

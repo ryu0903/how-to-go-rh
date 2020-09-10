@@ -2,23 +2,18 @@
   <li class="media">
     <div class="row media-body">
       <div class="col-md-4">
-       
+        <% if destination.schedules.any? %>
+          <span><%= link_to destination_path(destination), class: 'post-type-schedule' do %><i class="fas fa-calendar-alt"></i> Schedule<% end %></span>
+        <% else %>
+          <span><%= link_to destination_path(destination), class: 'post-type-destination' do %><i class="fas fa-map-marked-alt"></i> Destination<% end %></span>
+        <% end %>
+        <div class='username'>Posted by <%= link_to destination.user.name, destination.user %></div>
         <span>
           <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
         </span>
         <div>
           <%= render 'users/favorite_form', destination: destination %>
         </div>
-      </div>
-      <div class="col-md-8">
-        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
-        <span class='from'>From: <%= destination.from %></span>
-        <span class='date'>Date: <%= destination.date %></span><br>
-        <% unless destination.time.blank? %>
-        <span class='time'>Time required: <%= destination.time %></span>
-        <% end %>
-        <span class='outline'><%= destination.outline %></span>
-        <span class='username'>User: <%= link_to destination.user.name, destination.user %></span>
         <div>
           <span class='edit'>
             <% if current_user == destination.user %>
@@ -30,6 +25,15 @@
           </span>
         </div>
         
+      </div>
+      <div class="col-md-8 feed-detail">
+        <span class='to'>Destination: <%= destination.to %></span>
+        <span class='from'>From: <%= destination.from %></span>
+        <span class='date'>Date: <%= destination.date %></span>
+        <% unless destination.time.blank? %>
+        <span class='time'>Time required: <%= destination.time %></span>
+        <% end %>
+        <span class='outline'><%= destination.outline %></span>
       </div>
     </div>
   </li>

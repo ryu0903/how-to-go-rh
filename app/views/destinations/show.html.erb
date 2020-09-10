@@ -1,25 +1,43 @@
-<% provide(:title, "Destination: #{@destination.to}") %>
+<% if @schedules.any? %>
+  <% provide(:title, "Schedule: #{@destination.to}") %>
+<% else %>
+  <% provide(:title, "Destination: #{@destination.to}") %>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <span class="picture">
-        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
-      </span>
-      <div class="change-dish">
-        <% if current_user == @destination.user %>
-          <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
+      <div>
+        <% if @destination.schedules.any? %>
+          <span class='show-post-type-schedule'><i class="fas fa-calendar-alt"></i> Schedule outline</span>
+        <% else %>
+          <span class='show-post-type-destination'><i class="fas fa-map-marked-alt"></i> Destination</span>
         <% end %>
-        <% if current_user.admin? || (current_user == @destination.user) %>
-          <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
-        <% end %>  
-        <%= render 'users/favorite_form', destination: @destination %>
       </div>
-    </div>
-    
-    <div class="col-md-8">
       <div>
         <div class="destination-show-user">Posted by <%= link_to @destination.user.name, @destination.user %></div>
       </div>
+      
+      <span class="picture">
+        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
+      </span>
+      <div class="show-favorite-button">
+        <%= render 'users/favorite_form', destination: @destination %>
+      </div>
+      <div>
+        <span class="destination-show-user">
+          <% if current_user == @destination.user %>
+            <%= link_to 'Edit', edit_destination_path(@destination), class: "edit-destination" %>
+          <% end %>
+          <% if current_user.admin? || (current_user == @destination.user) %>
+            <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you OK?" } %>
+          <% end %>  
+        </span>
+      </div>
+    </div>
+    
+    <div class="col-md-8 show-destination-detail">
+     
     
       <div>
         <div class="destination-show-h2">Destination</div>
@@ -70,17 +88,25 @@
         <div class="destination-show-h4"><%= @destination.reference %></div>
       </div>
       <% end %>
-      
+    </div>
+  </div>
+  
+   <% if @schedules.any? %>
+    <%= render 'show_schedule', schedules: @schedules %>
+  <% end %>
+     
+  <div class='row'>
+    <div class='offset-md-4 col-md-8'>   
       <div>
         <div class="destination-show-h2">Comments <span class="badge badge-secondary" id="comment_count"><%= @destination.comments.count %></span></div>
-        <div class="destination-show-h4-commentfeed">
+        <div class="commentfeed">
           <%= render 'comments/comment_feed', comments: @comments %>
         </div>
         <div class="destination-show-h4">
           <%= render 'comments/new_form' %>
         </div>
       </div>
-      
     </div>
-  </div>  
+  </div>
+      
 </div>
