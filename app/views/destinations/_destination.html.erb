@@ -1,7 +1,7 @@
 <% destinations.each do |destination| %>
   <li class="media">
     <div class="row media-body">
-      <div class="col-md-4">
+      <div class="col-md-offset-1 col-md-4">
         <% if destination.schedules.any? %>
           <span><%= link_to destination_path(destination), class: 'post-type-schedule' do %><i class="fas fa-calendar-alt"></i> Schedule<% end %></span>
         <% else %>
@@ -26,7 +26,7 @@
         </div>
         
       </div>
-      <div class="col-md-8 feed-detail">
+      <div class="col-md-7 feed-detail">
         <span class='to'>Destination: <%= destination.to %></span>
         <span class='from'>From: <%= destination.from %></span>
         <span class='date'>Date: <%= destination.date %></span>

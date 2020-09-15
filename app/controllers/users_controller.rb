@@ -4,15 +4,18 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @title = "Signup"
   end
 
   def show
     @user = User.find(params[:id])
     @destinations = @user.destinations.page(params[:page]).per(5)
+    @title = 'Profile'
   end
 
   def index
     @users = User.all.page(params[:page])
+    @title ="All Users"
   end
   
   def create
@@ -28,6 +31,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+    @title = "Edit"
   end
   
   def update
@@ -75,6 +79,7 @@ class UsersController < ApplicationController
   def favorites
     @user = User.find(params[:id])
     @favorites = @user.favorites.page(params[:page]).per(5)
+    @title = 'Favorite'
   end
   
   private

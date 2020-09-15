@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   delete 'logout', to: "sessions#destroy"
   
   #destination
-  resources :destinations
+  resources :destinations do
+    collection do
+      get :new_schedule
+    end
+  end
   
   #relationship
   resources :relationships, only: [:create, :destroy]

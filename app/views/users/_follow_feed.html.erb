@@ -5,12 +5,15 @@
         <div class="media-body">
           <%= gravatar_for user, size: 50 %>
           <%= link_to user.name, user %>
-          <div class="feed-follow-button">
+          <div class="feed-follow-button ">
           <%= render 'users/follow_form', user: user %>
           </div>
+          
         </div>
       </li>
     <% end %>
   </ul>
-  <%= paginate users %>
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <%= paginate users %>
+  </div>
 <% end %>

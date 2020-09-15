@@ -1,16 +1,16 @@
 <% provide(:title, "Favorite") %>
-  <div class="container">
+  <div class="gtco-container">
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-md-8 col-md-offset-2">
+        <p></p>
+        <%= render 'layouts/search' %>
         <div class="row">
-          <div class"col-md-4">
-            <h3 class="title-profile">Profile</h3>
-            <div>
-              <%= gravatar_for @user, size: 120 %>
-            </div>
+          <p></p>
+          <div class="col-md-offset-2 col-md-4">
+            <p><%= gravatar_for @user, size: 120 %></p>
           </div>  
       
-          <div class="offset-md-3 col-md-5 user_profile">
+          <div class="col-md-6">
             <h4 class="show-user-name"><%= @user.name %></h4>
                 
             <div>
@@ -33,7 +33,7 @@
           <div class="text-center page-titles">Favorites</div>
           <ul class="nav nav-tabs nav-justified">
             <li class="nav-item">
-              <a href="<%= user_path(@user) %>" class="nav-link  <%= 'active' if current_page?(user_path(@user)) %>">
+              <a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">
                 Posts <span class="badge badge-secondary"><%= @user.destinations.count %></span>
               </a>
             </li>
@@ -43,10 +43,12 @@
               </a>
             </li>
           </ul>
-          <div class="feed">
+          <ul class="feed">
             <%= render 'favorites/favorites', favorites: @favorites %>
-            <%= paginate @favorites %>
-          </div>
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <%= paginate @favorites %>
+            </div>
+          </ul>
         </div>
       </div>
     </div>

@@ -1,10 +1,18 @@
 /*
- *= require _honoka
-
- */
+*= require animate.css
+*= require icomoon.css
+*= require bootstrap.css
+*= require flexslider.css
+*= require style.css
+*= require magnific-popup.css
+*/
  
 
-@import 'custom';
+@import "style.scss";
+@import "bootstrap-sprockets";
+@import "bootstrap.scss";
+@import "custom.scss";
+@import "icomoon/style";
 
 
 

@@ -1,0 +1,23 @@
+<% provide(:title, "Search results: #{@search_word}") %>
+<div class="gtco-container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <p></p>
+      <div><%= render 'layouts/search' %></div>
+      <div class="row">
+        <div class="col-md-offset-1">
+          <% if @search_word.present? %>
+            <h3>"<%= @search_word %>"の検索結果: <%= @q.count %>件</h3>
+          <% end %>
+        </div>
+      </div>
+      
+      <ul class="feed">
+        <%= render 'destinations/destination', destinations: @q %>
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <% paginate @q %>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

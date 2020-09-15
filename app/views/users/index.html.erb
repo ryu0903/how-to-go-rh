@@ -1,9 +1,13 @@
 <% provide(:title, 'All Users') %>
-<div class="container">
-  <h1>All Users</h1>
-  <%= paginate @users %>  
-    <ul class="users list-unstyled">
-      <%= render 'users', users: @users %>
-    </ul>
-  <%= paginate @users %>  
+<div class="gtco-container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="users list-unstyled">
+        <%= render 'users', users: @users %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <%= paginate @users %>
+  </div>
 </div>

@@ -36,7 +36,7 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
-    flash[:success] = 'Logged Out'
+    flash[:success] = 'ログアウトしました。'
   end
   
   def current_user?(user)

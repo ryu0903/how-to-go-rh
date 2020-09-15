@@ -11,12 +11,12 @@
       <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
       <p class="notification-message"> <%= link_to user.name, user_path(user) %>さんがお気に入りに登録しました。</p>
       <div class="row media-body">
-      <div class="col-md-4">
+      <div class="col-md-offset-1 col-md-4">
         <span>
           <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
         </span>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-7">
         <span class='to'><%= link_to destination.to, destination_path(destination) %></span>
         <span class='from'>From: <%= destination.from %></span>
         <span class='date'>Date: <%= destination.date %></span>
@@ -29,15 +29,15 @@
       <p><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
       <p class="notification-message"><%= link_to user.name, user_path(user) %>さんがコメントしました。「<%= notification.content %>」</p>
       <div class="row media-body">
-      <div class="col-md-4">
+      <div class="col-md-offset-1 col-md-4">
         <span>
           <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
         </span>
       </div>
-      <div class="col-md-8">
-        <span class='to'><%= link_to destination.to, destination_path(destination) %></span><br>
+      <div class="col-md-7">
+        <span class='to'><%= link_to destination.to, destination_path(destination) %></span>
         <span class='from'>From: <%= destination.from %></span>
-        <span class='date'>Date: <%= destination.date %></span><br>
+        <span class='date'>Date: <%= destination.date %></span>
         <% unless destination.time.blank? %>
         <span class='time'>Time required: <%= destination.time %></span>
         <% end %>
