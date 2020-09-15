@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  
+  #toppage
   root to: 'toppages#home'
+  resources :toppages do
+    collection do
+      get :about
+    end
+  end
+  
   
   #user
   get 'signup', to: "users#new"
