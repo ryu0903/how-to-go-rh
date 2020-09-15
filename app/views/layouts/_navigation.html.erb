@@ -1,0 +1,43 @@
+<header class="sticky-top">
+  <nav class="gtco-nav" role="navigation">
+    <div class="gtco-container"> 
+      <div class="col-sm-4 col-xs-12 gtco-logo">
+        <%= link_to root_url do %><strong>How to Go</strong><% end %>
+      </div>
+      <div class="col-xs-8 text-right menu-1">
+        <ul>
+        <% if logged_in? %>
+          <li class="has-dropdown">
+            <a href="#"><i class="fas fa-compass"></i> New Post</a>
+            <ul class="dropdown">
+              <li><%= link_to new_destination_path, class: 'nav-link' do %><i class="fas fa-map-marked-alt"></i> Destination<% end %></li>
+              <li><%= link_to new_schedule_destinations_path, class: 'nav-link' do %><i class="fas fa-calendar-alt"></i> Schedule<% end %></li>
+            </ul>
+          </li>
+          
+          <% if current_user.notification == true %>
+            <li class="new_notification">
+          <% else %>    
+            <li class="no_notification">
+          <% end %>
+            <%= link_to notifications_path, class: 'nav-link' do %><span><i class="fas fa-bell"></i> Notice</span><% end %></li>
+          <li><%= link_to favorites_user_path(current_user), class: 'nav-link' do %><i class="fas fa-heart"></i> Favorite<% end %></li>
+          <li class="has-dropdown">
+            <a href="#"><i class="fas fa-user-cog"></i><%= current_user.name %></a>
+            <ul class="dropdown">
+              <li><%= link_to user_path(current_user) do %><i class="fas fa-user"></i> Profile<% end %></li>
+              <li><%= link_to users_path do %><i class="fas fa-users"></i> Users<% end %></li>
+              <li><%= link_to "#" do %><i class="fas fa-file-csv"></i> CSV<% end %></li>
+              <li class="dropdown-divider"></li>
+              <li><%= link_to logout_path, method: :delete do %><i class="fas fa-sign-out-alt"></i> Logout<% end %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "#", class: 'nav-link' do %><i class="fas fa-info-circle"></i> What's How to Go?<% end %></li>
+　　　　  <li><%= link_to signup_path, class: 'nav-link' do %><i class="fas fa-user-plus"></i> Signup<% end %></li>
+　　　　　<li><%= link_to login_path, class: 'nav-link' do %><i class="fas fa-sign-in-alt"></i> Login<% end %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>

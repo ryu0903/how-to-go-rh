@@ -2,16 +2,34 @@ class DestinationsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update, :destroy]
   
+  def index
+    unless @search_word.present?
+      redirect_to root_path
+    end
+  end
+    
   def new
     @destination = Destination.new
-    @destination.schedules.build
+    @title = "New Destination"
   end
+  
+  def new_schedule
+    @destination = Destination.new
+    @destination.schedules.build
+    @title = "New Schedule"
+  end  
   
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
     @comments = @destination.comments
     @schedules = @destination.schedules
+    
+    if @destination.schedules.any?
+      @title = "Schedule"
+    else
+      @title= "Destination"
+    end
   end
   
   def create
@@ -29,6 +47,7 @@ class DestinationsController < ApplicationController
   def edit
     @destination = Destination.find(params[:id])
     @schedules = @destination.schedules
+    @title = "Edit"
   end
   
   def update

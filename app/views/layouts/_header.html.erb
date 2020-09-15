@@ -1,35 +1,14 @@
-<header class="sticky-top">
-  <div class="container"> 
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
-      
-      <%= link_to(image_tag("How to Go-logo.png", :alt => ""), root_url, id: 'logo') %>
-    
-      <ul class="nav navber-nav ml-auto header-menu">
-        <% if logged_in? %>
-          <li class="nav-item"><%= link_to new_destination_path, class: 'nav-link' do %><i class="fas fa-compass"></i> New Post<% end %></li>
-          <% if current_user.notification == true %>
-            <li class="nav-item new_notification">
-          <% else %>    
-            <li class="nav-item no_notification">
-          <% end %>
-            <%= link_to notifications_path, class: 'nav-link' do %><span><i class="fas fa-bell"></i> Notice</span><% end %></li>
-          <li class="nav-item"><%= link_to favorites_user_path(current_user), class: 'nav-link' do %><i class="fas fa-heart"></i> Favorite<% end %></li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user-cog"></i><%= current_user.name %></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to user_path(current_user) do %><i class="fas fa-user"></i> Profile<% end %></li>
-              <li class="dropdown-item"><%= link_to users_path do %><i class="fas fa-users"></i> Users<% end %></li>
-              <li class="dropdown-item"><%= link_to "#" do %><i class="fas fa-file-csv"></i> CSV<% end %></li>
-              <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to logout_path, method: :delete do %><i class="fas fa-sign-out-alt"></i> Logout<% end %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li class="nav-item"><%= link_to "#", class: 'nav-link' do %><i class="fas fa-info-circle"></i> What's How to Go?<% end %></li>
-　　　　  <li class="nav-item"><%= link_to signup_path, class: 'nav-link' do %><i class="fas fa-user-plus"></i> Signup<% end %></li>
-　　　　　<li class="nav-item"><%= link_to login_path, class: 'nav-link' do %><i class="fas fa-sign-in-alt"></i> Login<% end %></li>
-        <% end %>
-      </ul>
-    </nav>
-  </div>
-</header>
+	<header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner" style="background-image: url(/images/airplane.jpg)">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-center">
+					<div class="row row-mt-15em">
+						<div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+							<h1 class="gtco-logo"><%= @title %></h1>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>

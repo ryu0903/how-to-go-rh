@@ -1,16 +1,16 @@
 <% if logged_in? %>
-  <div class="container">
-    <h3 class="text-center">Everyone's Posts</h3>
-    <main class="p-3 col-md-8 offset-md-2">
+  <div class="gtco-container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p></p>
+        <div><%= render 'layouts/search' %></div>
         <div id="destination" class="feed">
           <%= render 'shared/destination_feed' %>
         </div>
-    </main>
+      </div>
+    </div>
   </div>
 <% else %>
-  <div class="container">
-    <h1>What's How to Go?</h1>
-    <h2>How to Goは、「行き先」の共有に特化したサービスです。</h2>
-  </div>
+  <%= render 'about' %>
 <% end %>
     

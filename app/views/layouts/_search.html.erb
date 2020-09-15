@@ -1,0 +1,16 @@
+<div class="row">
+  <%= search_form_for @search do |f| %>
+      <div class="col-md-10">
+        <div class="form-group">
+          <%= f.search_field :to_or_schedules_to_cont, placeholder: "Search by where you want to go!", class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.submit 'Search', class: 'btn btn primary' %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+  

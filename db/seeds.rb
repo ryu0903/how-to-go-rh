@@ -1,19 +1,19 @@
 User.create!(
   [       
-    { name:  "採用　一郎",
-      email: "recruit@example.com",
+    { name:  "山田 一郎",
+      email: "yamada@example.com",
       password: "password",
       password_confirmation: "password",
       admin: true
     },
         
-    { name:  "佐藤　太郎",
+    { name:  "佐藤 太郎",
       email: "satou@example.com",
       password: "foobar",
       password_confirmation: "foobar"
     },
         
-    { name:  "佐々木　花子",
+    { name:  "佐々木 花子",
       email: "sasaki@example.com",
       password: "foobar",
       password_confirmation: "foobar"

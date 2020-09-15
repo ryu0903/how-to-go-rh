@@ -19,7 +19,7 @@ RSpec.describe "Destinations", type: :system do
       end
       
       it "正しいタイトルの確認" do
-        expect(page).to have_title full_title('New Post')
+        expect(page).to have_title full_title('New Destination')
       end
       
       it "入力フォームのラベル確認" do
@@ -82,14 +82,17 @@ RSpec.describe "Destinations", type: :system do
   describe "Schedule登録" do  
     before do
       login_for_system(user)
-      visit new_destination_path
-      click_on "Schedule"
+      visit new_schedule_destinations_path
     end
     
     context "ページレイアウト" do
       it "追加ボタン、削除ボタン確認" do
         expect(page).to have_link "Remove Schedule"
         expect(page).to have_link "Add Schedule"
+      end
+      
+      it "正しいタイトルの確認" do
+        expect(page).to have_title full_title('New Schedule')
       end
       
       it "削除ボタンを押すとScheduleが削除されること", js: true do
@@ -418,6 +421,83 @@ RSpec.describe "Destinations", type: :system do
         click_link "Delete"
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content '投稿を削除しました。'
+      end
+    end
+  end
+  
+  describe "検索機能" do
+    context "ログインしている場合" do
+      before do 
+        login_for_system(user)
+        visit root_path
+      end
+      
+      it "検索窓が指定したページに表示されていること" do
+        expect(page).to have_css "form#destination_search"
+        visit user_path(user)
+        expect(page).to have_css "form#destination_search"
+        visit favorites_user_path(user)
+        expect(page).to have_css "form#destination_search"
+      end
+    
+    
+      it "一覧の中から検索ワードに該当する結果が表示されること" do
+        create(:destination, to: 'Tokyo', user: user)
+        create(:destination, to: 'Osaka', user: user)
+        create(:destination, to: 'Yokohama', user: other_user)
+        create(:destination, to: 'Kyoto', user: other_user)
+        
+        fill_in 'q_to_or_schedules_to_cont', with: 'Tokyo'
+        click_button 'Search'
+        expect(page).to have_css 'h3', text: '"Tokyo"の検索結果: 1件'
+        within find('.feed') do
+          expect(page).to have_css 'li', count: 1
+        end
+        
+        fill_in 'q_to_or_schedules_to_cont', with: 'Osaka'
+        click_button 'Search'
+        expect(page).to have_css 'h3', text: '"Osaka"の検索結果: 1件'
+        within find('.feed') do
+          expect(page).to have_css 'li', count: 1
+        end
+        
+        user.follow(other_user)
+        fill_in 'q_to_or_schedules_to_cont', with: 'Yokohama'
+        click_button 'Search'
+        expect(page).to have_css 'h3', text: '"Yokohama"の検索結果: 1件'
+        within find('.feed') do
+          expect(page).to have_css 'li', count: 1
+        end
+        
+        fill_in 'q_to_or_schedules_to_cont', with: 'Kyoto'
+        click_button 'Search'
+        expect(page).to have_css 'h3', text: '"Kyoto"の検索結果: 1件'
+        within find('.feed') do
+          expect(page).to have_css 'li', count: 1
+        end
+        
+        create(:schedule, to: 'Hiroshima', destination: Destination.first)
+        fill_in 'q_to_or_schedules_to_cont', with: 'Hiroshima'
+        click_button 'Search'
+        expect(page).to have_css 'h3', text: '"Hiroshima"の検索結果: 1件'
+        within find('.feed') do
+          expect(page).to have_css 'li', count: 1
+        end
+        
+      end
+    
+      it "検索窓から空のまま検索ボタンを押した場合、トップページが表示されること" do
+        fill_in 'q_to_or_schedules_to_cont', with: ""
+        click_button 'Search'
+        expect(page).to have_title full_title
+        expect(page).to have_content "Everyone's Posts"
+      end
+    end
+    
+    context "ログインしていない場合" do
+      it "検索窓が表示されないこと" do
+        visit root_path
+        expect(page).not_to have_css "form#destination_search"
       end
     end
   end

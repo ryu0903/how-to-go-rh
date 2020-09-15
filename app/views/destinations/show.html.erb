@@ -4,16 +4,12 @@
   <% provide(:title, "Destination: #{@destination.to}") %>
 <% end %>
 
-<div class="container">
+<div class="gtco-container">
   <div class="row">
-    <div class="col-md-4">
-      <div>
-        <% if @destination.schedules.any? %>
-          <span class='show-post-type-schedule'><i class="fas fa-calendar-alt"></i> Schedule outline</span>
-        <% else %>
-          <span class='show-post-type-destination'><i class="fas fa-map-marked-alt"></i> Destination</span>
-        <% end %>
-      </div>
+  <div class="col-md-10 col-md-offset-1">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-4">
+      <p></p>
       <div>
         <div class="destination-show-user">Posted by <%= link_to @destination.user.name, @destination.user %></div>
       </div>
@@ -36,9 +32,8 @@
       </div>
     </div>
     
-    <div class="col-md-8 show-destination-detail">
+    <div class="col-md-7 show-destination-detail">
      
-    
       <div>
         <div class="destination-show-h2">Destination</div>
         <div class="destination-show-h4"><%= @destination.to %></div>
@@ -96,7 +91,7 @@
   <% end %>
      
   <div class='row'>
-    <div class='offset-md-4 col-md-8'>   
+    <div class='col-md-offset-5 col-md-7'>   
       <div>
         <div class="destination-show-h2">Comments <span class="badge badge-secondary" id="comment_count"><%= @destination.comments.count %></span></div>
         <div class="commentfeed">
@@ -108,5 +103,6 @@
       </div>
     </div>
   </div>
-      
+  </div>
+  </div>
 </div>

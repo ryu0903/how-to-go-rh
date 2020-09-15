@@ -5,25 +5,17 @@
   box-sizing:         border-box;
 }
 
-// common
-* {
-    font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
-}
 
-.pagination {
-  justify-content: center;
-}
+// navigation
+
+
 
 // sessions_new
 
-.checkbox {
- margin-top: -10px;
- margin-bottom: 10px;
- span {
-   margin-left: 20px;
-   font-weight: normal;
- }
+.checkbox-cursor {
+ cursor: pointer;
 }
+
  #session_remember_me {
  width: auto;
  margin-left: 0;
@@ -102,7 +94,7 @@
 }
 
 .show-destination-detail{
-    margin-top: 75px;
+    margin-top: 30px;
 }
 
 // destinations_new
@@ -115,6 +107,9 @@
 .optional {
   font-size: 13px;
 }
+
+
+
 
 // destination_schedule_new
 .new-schedule-title {
@@ -186,9 +181,6 @@
 }
 
 // users_show
-.stats{
-    margin: 10px 0;
-}
 
 .page-titles {
     font-size: 35px;
@@ -201,6 +193,12 @@
 .user_show_feed {
     margin-top: 30px;
 }
+
+// users_edit
+.gravatar_edit {
+    margin-bottom: 10px;
+}
+
 
 // following/followers
 .feed-follow{

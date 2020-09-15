@@ -2,5 +2,10 @@
   <ul class="destinations">
     <%= render 'destinations/destination', destinations: @destinations %>
   </ul>
-  <%= paginate @destinations %>
+  
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <%= paginate @destinations %>
+  </div>  
+
+  
 <% end %>

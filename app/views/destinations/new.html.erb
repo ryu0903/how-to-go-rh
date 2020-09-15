@@ -1,23 +1,9 @@
-<% provide(:title, 'New Post') %>
-<div class="container">
-  <h3 class="text-center mb-5">New Post</h3>
-    <main class="p-3 col-md-8 offset-md-2">
-      <ul class="nav nav-tabs nav-justified">
-        <li class="nav-item">
-          <a href="#destination" class="nav-link active" data-toggle="tab">Destination</a>
-        </li>
-        <li class="nav-item">
-          <a href="#schedule" class="nav-link" data-toggle="tab">Schedule</a>
-        </li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="destination" class="tab-pane active">
-          <%= render 'destinations/form' %>
-        </div>
-        <div id="schedule" class="tab-pane">
-          <%= render 'destinations/schedule_form' %>
-        </div>
-      </div>
-    </main>
+<% provide(:title, 'New Destination') %>
+<div class="gtco-container">
+  <div class="col-md-8 col-md-offset-2">
+    <p></p>
+    <div id="destination">
+      <%= render 'destinations/form' %>
+    </div>
+  </div>
 </div>

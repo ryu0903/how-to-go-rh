@@ -1,16 +1,14 @@
 <% provide(:title, @title) %>
-  <div class="container">
+  <div class="gtco-container">
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-md-8 col-md-offset-2">
         <div class="row">
-          <div class"col-md-4">
-            <h3 class="title-profile">Follow</h3>
-            <div>
-              <%= gravatar_for @user, size: 120 %>
-            </div>
+          <p></p>
+          <div class="col-md-offset-2 col-md-4">
+            <p><%= gravatar_for @user, size: 120 %></p>
           </div>  
       
-          <div class="offset-md-3 col-md-5 user_profile">
+          <div class="col-md-6">
             <h4 class="show-user-name"><%= link_to @user.name, user_path(@user) %></h4>
                 
             <div>
