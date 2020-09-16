@@ -62,6 +62,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'capybara-screenshot'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -73,7 +74,6 @@ group :production do
 end
 
 gem 'devise'
-
 
 gem 'jquery-rails'
 

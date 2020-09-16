@@ -28,7 +28,7 @@ class DestinationsController < ApplicationController
     if @destination.schedules.any?
       @title = "Schedule"
     else
-      @title= "Destination"
+      @title = "Destination"
     end
   end
   
@@ -77,7 +77,8 @@ class DestinationsController < ApplicationController
   
     def destination_params
       params.require(:destination).permit(:to, :from, :time, :date, :outline, :detail, :notice, :reference, :picture,
-                                            schedules_attributes:[:id, :_destroy, :to, :from, :date, :time, :detail, :notice, :picture])
+                                            schedules_attributes: [:id, :_destroy, :to, :from, :date,
+                                                                   :time, :detail, :notice, :picture])
     end
     
     def correct_user
