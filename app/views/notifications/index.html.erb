@@ -3,7 +3,7 @@
     <div class="col-md-8 col-md-offset-2">
       <p></p>
       <% if @notifications.present? %>
-        <%= link_to notification_path(@notifications), class: 'notification-delete', method: :delete, data: { confirm: "Are you OK?" } do %>
+        <%= link_to notification_path(@notifications), class: 'notification-delete', method: :delete, data: { confirm: "通知を全て削除しますか？" } do %>
           <i class="fas fa-trash" style="color: gray;"></i>
           <h7 style="color: gray;">Delete all</h7>
         <% end %>

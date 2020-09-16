@@ -4,7 +4,7 @@ class ToppagesController < ApplicationController
       @destinations = current_user.feed_destination.order(id: :desc).page(params[:page]).per(5)
       @title = "Everyone's Posts"
     else
-      @title = "Login for recruiter"
+      @title = "Recruiter Page"
     end
   end
   

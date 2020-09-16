@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @user = @comment.destination.user
     if @comment.save
       respond_to do |format|
-        format.html  { redirect_to @destination }
+        format.html { redirect_to @destination }
         format.js 
       end
       
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     if current_user.id == @comment.user.id 
       @comment.destroy
       respond_to do |format|
-        format.html  { redirect_to @destination }
+        format.html { redirect_to @destination }
         format.js 
       end
     else
@@ -36,6 +36,7 @@ class CommentsController < ApplicationController
   end
   
   private
+  
     def comment_params
       params.require(:comment).permit(:content, :item_id, :user_id)
     end

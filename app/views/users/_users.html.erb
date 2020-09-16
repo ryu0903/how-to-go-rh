@@ -5,7 +5,7 @@
       <%= link_to user.name, user %>
       <% if (current_user.admin? && current_user != user) || (!current_user.admin? && current_user == user) %>
       | <%= link_to "Delete", user_path(user), method: :delete,
-                                          data: { confirm: "Are you OK？" } %>
+                                          data: { confirm: "削除してもよろしいですか？" } %>
       <% end %>                                    
     </div>
   </li>
